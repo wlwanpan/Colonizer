@@ -2,7 +2,7 @@ pragma solidity ^0.4.18;
 
 contract AssetManager {
 
-  bytes32[]
+  bytes32[] assetID;
 
   event AssetLog(bool status, string description);
 

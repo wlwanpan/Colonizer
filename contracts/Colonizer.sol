@@ -11,44 +11,89 @@ contract Colonizer {
     bytes32 passwordhash;
     string colony;
 
-    bytes32[] assets;
+    bytes32[] assetsStorage;
     address[] relatives;
   }
 
   struct Asset {
+    address owner;
+
+    uint256 value;
+
+    bool valid;
+    bool onSale;
 
     string description;
-    // string type;
-    bytes32 longitude;
-    bytes32 latitude;
-    bytes32 id;
+    string assetType;
+    string longitude;
+    string latitude;
   }
 
-  mapping (bytes32 => Asset) assetsStorage; // store assets registered
-  mapping (bytes32 => Habitant) habitantsStorage; // store user by address
+  mapping (bytes32 => Asset) assetsStorage; // store assetsStorage registered
+  mapping (address => Habitant) habitantsStorage; // store user by address
+  // Function Modifiers
+  modifier habitantValid() { require(true);_; }
+  modifier assetValid(bytes32 _id) { require(assetsStorage[_id].valid);_; }
 
   function registerHabitant (string fullname, string username, string password, string colony) public {
-
     bytes32 passwordhash = keccak256(username, password);
-    bytes32 senderAddrHash = keccak256(msg.sender);
 
     Habitant memory newHabitant = Habitant(fullname, username, HabitantState.online, passwordhash, colony, new bytes32[](0), new address[](0));
-    habitantsStorage[senderAddrHash] = newHabitant;
+    habitantsStorage[msg.sender] = newHabitant;
   }
 
   function deRegister (string username, string password) public {
-    bytes32 passwordhash = keccak256(username, password);    
-    bytes32 senderAddrHash = keccak256(msg.sender);
+    bytes32 passwordhash = keccak256(username, password);
 
-    Habitant storage habitant = habitantsStorage[senderAddrHash];
-    if (habitant.passwordhash == passwordhash)
+    Habitant storage habitant = habitantsStorage[msg.sender];
+    if (habitant.passwordhash == passwordhash) {
       habitant.status = HabitantState.archieved;
+    }
   }
 
   function getCurrentState () public constant returns (HabitantState) {
-    bytes32 senderAddrHash = keccak256(msg.sender);
-    Habitant storage habitant = habitantsStorage[senderAddrHash];
+    Habitant storage habitant = habitantsStorage[msg.sender];
     return habitant.status;
+  }
+
+  function updateAssetValue(bytes32 _assetId, uint256 _value) public habitantValid returns(bool status) {
+    Asset storage currentAsset = assetsStorage[_assetId];
+    require(currentAsset.owner == msg.sender);
+    currentAsset.value = _value;
+    return(true);
+  }
+
+  function registerAsset(uint256 _value, string _description, string _assetType, string _longitude, string _latitude)
+  public habitantValid {
+    Habitant storage currentHabitant = habitantsStorage[msg.sender];
+
+    var assetId = keccak256(_assetType, _longitude, _latitude);
+
+    assetsStorage[assetId] = Asset({
+      owner: msg.sender,
+      value: _value,
+      valid: true,
+      onSale: false,
+      description: _description,
+      assetType: _assetType,
+      longitude: _longitude,
+      latitude: _latitude
+    });
+
+  }
+
+  function buyAsset(bytes32 _assetId) public payable habitantValid assetValid(_assetId) {
+    Asset storage currentAsset = assetsStorage[_assetId];
+    require(msg.value == currentAsset.value);
+    require(currentAsset.onSale);
+
+    currentAsset.owner.transfer(msg.value);
+    currentAsset.owner = msg.sender;
+    currentAsset.onSale = false;
+  }
+
+  function sellAsset(bytes32 _assetId) public habitantValid assetValid(_assetId) {
+    Asset storage currentAsset = assetsStorage[_assetId];
   }
 
 }
