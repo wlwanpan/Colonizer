@@ -24,32 +24,39 @@
   </div>
 </template>
 <script>
-  import LTable from '@/components/UIComponents/Table.vue'
-  import Card from '@/components/UIComponents/Cards/Card.vue'
-  const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
-  const tableData = []
-  export default {
-    components: {
-      LTable,
-      Card
-    },
-    props: {
-      selectedAsset: Object
-    },
-    data () {
-      return {
-        table1: {
-          columns: [...tableColumns],
-          data: [...tableData]
-        },
-        table2: {
-          columns: [...tableColumns],
-          data: [...this.$store.getters.getOnSaleAssets],
-          showBuy: "true"
-        }
+import LTable from '@/components/UIComponents/Table.vue'
+import Card from '@/components/UIComponents/Cards/Card.vue'
+const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+const tableData = []
+
+export default {
+
+  components: {
+    LTable,
+    Card
+  },
+
+  props: {
+    selectedAsset: Object
+  },
+
+  data () {
+    return {
+      table1: {
+        columns: [...tableColumns],
+        data: [...tableData]
+      },
+      table2: {
+        columns: [...tableColumns],
+        data: [...this.$store.getters.getAssets({onSale: true})],
+        showBuy: "true"
       }
     }
+  },
+
+  mounted() {
   }
+}
 </script>
 <style>
 </style>

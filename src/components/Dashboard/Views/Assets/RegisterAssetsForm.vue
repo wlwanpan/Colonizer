@@ -95,14 +95,12 @@ export default {
       // registerAsset(uint256 _value, string _description, uint256 _assetType, string _longitude, string _latitude)
       let { value, description, assetType, longitude, latitude } = this.asset
       let params = [
-        parseInt(value),
+        this.toBigNumber(value),
         description,
-        parseInt(this.assetTypeOptions.indexOf(assetType)),
+        this.toBigNumber(this.assetTypeOptions.indexOf(assetType)),
         longitude,
         latitude
       ]
-
-      console.log(params)
 
       this.$store.dispatch(
         'contactCall',
@@ -112,9 +110,16 @@ export default {
         }
       )
       .then(result => {
-        debugger
-        console.log(result)
-        this.$router.push('/admin/market-place');
+        this.$store.dispatch(
+          'contactCall',
+          {
+            method: 'loadAssets',
+            params: undefined
+          }
+        )
+        .then((data) => {
+
+        })
       })
     },
 

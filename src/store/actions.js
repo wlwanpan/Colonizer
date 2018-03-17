@@ -32,6 +32,7 @@ export default {
     dispatch('showLoading')
 
     var { colonizer, address } = state.contract
+    const PAGINATION_LIMIT = 10
     var contract = colonizer.at(address)
     var contractOption = { from: state.habitant.address, gas: 500000 }
 
@@ -46,18 +47,37 @@ export default {
           contract.registerHabitant(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
-
+          break
         case 'registerAsset':
           contract.registerAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
+          break
+        case 'loadAssets':
+          var promiseOutput = []
 
-        case 'deRegister':
-          // implement deregister
+          contract.assetCount(contractOption)
+          .then(assetCount => {
+            var totalAssets = assetCount.toNumber()
+            var paginationFrom = _(state.assets).keys().length
+            var paginationTo = (totalAssets - paginationFrom) > PAGINATION_LIMIT ? (paginationFrom + PAGINATION_LIMIT) : totalAssets
 
-        case 'getCurrentState':
-          // implement get current state
-
+            _(_.range(paginationFrom, paginationTo)).each((paginationIndex) => {
+              promiseOutput.push(
+                new Promise((resolve, reject) => {
+                  contract.getAssetByIndex.call(web3.toBigNumber(paginationIndex))
+                  .then(data => resolve(data))
+                })
+              )
+              Promise.all(promiseOutput).then(data => {
+                commit('UPDATE_ASSETS', data)
+                resolve(data)
+              })
+            })
+          })
+          break
+        default:
+          resolve('method not implement yet')
 
       }
     })

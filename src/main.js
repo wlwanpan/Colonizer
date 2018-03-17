@@ -5,6 +5,7 @@ import App from './App.vue'
 import LightBootstrap from './light-bootstrap-main'
 
 import mixins from '@/js/mixins'
+import underscore from 'vue-underscore'
 
 import store from '@/store/store'
 import routes from '@/routes/routes'
@@ -14,7 +15,11 @@ import TruffleContract from 'truffle-contract'
 import ColonizerContract from '@contracts/Colonizer.json'
 
 Vue.use(VueRouter)
+Vue.use(underscore)
 Vue.use(LightBootstrap)
+
+import {_} from 'vue-underscore'
+window._ = _ // fucking hell its not importing from any components
 
 Vue.config.productionTip = false
 
@@ -35,7 +40,8 @@ window.addEventListener('load', function () {
   var colonizerContract = TruffleContract(ColonizerContract)
   colonizerContract.setProvider(window.web3.currentProvider)
 
-  const contractAddress = '0x82002f103255b870c5ad9000b04dba7146fc12f3'
+  // const testnetContractAddress = '0xa922202e3830aa5bc088652db8774cb975762a40'
+  const contractAddress = '0xd99c297011abb5ae279ff634982dc325029dde67'
 
   store.dispatch(
     'updateColonizerContract',

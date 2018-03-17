@@ -30,6 +30,9 @@ contract Colonizer {
     string latitude;
   }
 
+  uint256 public assetCount;
+  uint256 public habitantCount;
+
   bytes32[] assetKeys;
   address[] habitantKeys;
 
@@ -47,6 +50,8 @@ contract Colonizer {
 
     habitantsStorage[msg.sender] = Habitant(fullname, username, HabitantState.online, passwordhash, colony, new address[](0));
     habitantKeys.push(msg.sender);
+
+    habitantCount++;
   }
 
   function deRegister (string username, string password) public {
@@ -56,12 +61,15 @@ contract Colonizer {
     if (habitant.passwordhash == passwordhash) {
       habitant.status = HabitantState.archieved;
     }
+
+    habitantCount--;
   }
 
   function getCurrentState () public view returns (HabitantState) {
     return habitantsStorage[msg.sender].status;
   }
 
+//-- Private Helper Functions for Asset -- //
   function getAssetTypeFromIndex(uint256 _index) pure private returns (AssetType) {
     if (_index == 0) { return AssetType.Residential; }
     else if (_index == 1) { return AssetType.Industrial; }
@@ -77,6 +85,7 @@ contract Colonizer {
     else if (_type == AssetType.Community) return('Community');
     else return('Other');
   }
+//-- end --//
 
   function registerAsset(uint256 _value, string _description, uint256 _assetType, string _longitude, string _latitude)
   public habitantOnline {
@@ -94,7 +103,9 @@ contract Colonizer {
       longitude: _longitude,
       latitude: _latitude
     });
+
     assetKeys.push(assetId);
+    assetCount++;
   }
 
   function buyAsset(bytes32 _assetId) public payable assetValid(_assetId) {
@@ -122,7 +133,7 @@ contract Colonizer {
   }
 
   function getAssetByIndex(uint256 _index) public view returns(
-    string ownerUsername, string colony, uint256 value, bool onSale,
+    bytes32 assetId, string ownerUsername, string colony, uint256 value, bool onSale,
     string assetType, string description, string longitude, string latitude
   ){
     require(_index >= 0 && _index < assetKeys.length);
@@ -131,7 +142,7 @@ contract Colonizer {
     Habitant memory owner = habitantsStorage[asset.owner];
 
     return(
-      owner.username, owner.colony, asset.value, asset.onSale,
+      _key, owner.username, owner.colony, asset.value, asset.onSale,
       convertAssetTypeToString(asset.assetType), asset.description, asset.longitude, asset.latitude
     );
   }

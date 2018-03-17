@@ -3,8 +3,6 @@ import Vuex from 'Vuex'
 import actions from './actions'
 import mutations from './mutations'
 
-const _ = require('underscore')
-
 Vue.use(Vuex)
 
 const state = {
@@ -106,7 +104,16 @@ const getters = {
   getOnSaleAssets: state => state.onSaleAssets,
 
   getAssets: state => filter => {
-    // to filter by
+    var {onSale, owned} = filter
+    var output = []
+    var assetDetails = _(state.assets).values()
+
+    _(assetDetails).each(asset => {
+      if (owned && asset.owner === state.habitant.username) { return output.push(asset) }
+      if (onSale && asset.onSale) { return output.push(asset) }
+    })
+
+    return output
   }
 
 }

@@ -21,6 +21,25 @@ export default {
     habitantDetails.address = state.habitant.address
     habitantDetails.status = 'online'
     state.habitant = habitantDetails
+  },
+
+  UPDATE_ASSETS (state, data) {
+    if (data.length == 0) return
+    var assetsOutput = _(state.assets).clone()
+    // string ownerUsername, string colony, uint256 value, bool onSale, string assetType, string description, string longitude, string latitude
+    _(data).each(
+      ([assetId, owner, colony, value, onSale, assetType, description, longitude, latitude]) => {
+        if (!_(state.assets).has(assetId)) {
+          assetsOutput[assetId] = { owner, colony, value, onSale, assetType, description, longitude, latitude }
+        }
+        else {
+          assetsOutput[assetId].owner = owner
+          assetsOutput[assetId].value = value
+          assetsOutput[assetId].onSale = onSale
+        }
+      }
+    )
+    state.assets = assetsOutput
   }
 
 }

@@ -80,9 +80,8 @@ export default {
 
   methods: {
     registerHabitant () {
-      var contract = this.$store.getters.getContract
       var params = [
-        this.fullName, this.username, this.password, this.colony
+        this.fullName, this.username, this.password, "ColonyA"
       ]
 
       this.$store.dispatch(
