@@ -1,49 +1,54 @@
 pragma solidity ^0.4.18;
-
 contract Colonizer {
 
-  enum habitantState { online, offline, archieved }
+  enum HabitantState { offline, online, archieved }
 
   struct Habitant {
 
     string fullName;
     string username;
-    habitantState status;
+    HabitantState status;
     bytes32 passwordhash;
     string colony;
 
-    address[] assets;
+    bytes32[] assets;
     address[] relatives;
-
   }
 
   struct Asset {
 
-    bytes32 id;
     string description;
-    string assetType;
+    // string type;
     bytes32 longitude;
     bytes32 latitude;
-
+    bytes32 id;
   }
 
-  mapping (bytes32 => Asset) assets; // store assets registered
-  mapping (address => Habitant) habitants; // store user by address
+  mapping (bytes32 => Asset) assetsStorage; // store assets registered
+  mapping (bytes32 => Habitant) habitantsStorage; // store user by address
 
   function registerHabitant (string fullname, string username, string password, string colony) public {
-    // register an account with from using struct above
+
+    bytes32 passwordhash = keccak256(username, password);
+    bytes32 senderAddrHash = keccak256(msg.sender);
+
+    Habitant memory newHabitant = Habitant(fullname, username, HabitantState.online, passwordhash, colony, new bytes32[](0), new address[](0));
+    habitantsStorage[senderAddrHash] = newHabitant;
   }
 
-  function loginHabitant (string _username, string _password) public {
-    // login account and increment online user count
+  function deRegister (string username, string password) public {
+    bytes32 passwordhash = keccak256(username, password);    
+    bytes32 senderAddrHash = keccak256(msg.sender);
+
+    Habitant storage habitant = habitantsStorage[senderAddrHash];
+    if (habitant.passwordhash == passwordhash)
+      habitant.status = HabitantState.archieved;
   }
 
-  function logoutHabitant () public {
-    // louout and decrement online user count
-  }
-
-  function deRegister () public {
-
+  function getCurrentState () public constant returns (HabitantState) {
+    bytes32 senderAddrHash = keccak256(msg.sender);
+    Habitant storage habitant = habitantsStorage[senderAddrHash];
+    return habitant.status;
   }
 
 }
