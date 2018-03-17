@@ -52,7 +52,6 @@ export default {
           contract.registerAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
-<<<<<<< HEAD
           break
         case 'loadAssets':
           var promiseOutput = []
@@ -79,7 +78,6 @@ export default {
           break
         default:
           resolve('method not implement yet')
-=======
 
         case 'deRegister':
           contract.deRegister(...params, contractOption)
@@ -95,7 +93,6 @@ export default {
           contract.buyAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
->>>>>>> f076937231a70cffb2b85dcc237456fa9ca1aeae
 
         case 'sellAsset':
           contract.sellAsset(...params, contractOption)
