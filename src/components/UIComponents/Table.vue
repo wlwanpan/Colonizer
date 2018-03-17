@@ -9,6 +9,7 @@
     <tr v-for="item in data">
       <slot :row="item">
         <td v-for="column in columns" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
+        <td><button type="submit" class="btn btn-success btn-fill" @click.prevent="clickBuyAsset(item)">Buy</button></td>
       </slot>
     </tr>
     </tbody>
@@ -27,6 +28,10 @@
       },
       itemValue (item, column) {
         return item[column.toLowerCase()]
+      },
+      clickBuyAsset(asset) {
+        // TODO: need to buy some assets
+        alert("gonnna buy this asset")
       }
     }
   }

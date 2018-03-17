@@ -32,6 +32,9 @@
       LTable,
       Card
     },
+    props: {
+      selectedAsset: Object
+    },
     data () {
       return {
         table1: {
