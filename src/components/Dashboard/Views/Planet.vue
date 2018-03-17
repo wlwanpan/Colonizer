@@ -75,8 +75,8 @@
       StatsCard
     },
     async mounted () {
-      d3.csv("https://gist.githubusercontent.com/dnprock/5215cc464cfb9affd283/raw/61bd2efeb92db5de5dedc1ee31f4d81137301400/population.csv", function(err, data) {
-      var config = {"color1":"#a1a3a7","color2":"#141a24","stateDataColumn":"state_or_territory","valueDataColumn":"population_estimate_for_july_1_2013_number"}
+      d3.csv("https://gist.githubusercontent.com/estellewan/91759b52fa93b7521bce4f0cf9108a69/raw/91ea8a54258cd7a2b78b4224ea44b023b073e1ce/population.csv", function(err, data) {
+      var config = {"color1":"#ffd59a","color2":"#e68800","stateDataColumn":"state_or_territory","valueDataColumn":"population_estimate_for_july_1_2013_number"}
 
       var WIDTH = 1000, HEIGHT = 500;
 
@@ -170,7 +170,7 @@
           .attr("width", width)
           .attr("height", height);
 
-      d3.tsv("https://s3-us-west-2.amazonaws.com/vida-public/geo/us-state-names.tsv", function(error, names) {
+      d3.tsv("https://gist.githubusercontent.com/estellewan/45518ebd074c7a657a8b85eecb773a68/raw/b9e0b24e05d690208b9f06caf9be81eda66237a1/us-state-names", function(error, names) {
 
         var name_id_map = {};
         var id_name_map = {};
@@ -188,7 +188,7 @@
         quantize.domain([d3.min(data, function(d){ return +d[MAP_VALUE] }),
         d3.max(data, function(d){ return +d[MAP_VALUE] })]);
 
-      d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/us.json", function(error, us) {
+      d3.json("https://gist.githubusercontent.com/estellewan/a26954cf8c01abcecd48af5fb3a114ee/raw/07b64d8879c02b5e2ad5ca61558af59e8fee46ca/gistfile1.txt", function(error, us) {
         svg.append("g")
             .attr("class", "states-choropleth")
           .selectAll("path")
@@ -210,13 +210,13 @@
                 var html = "";
 
                 html += "<div class=\"tooltip_kv\">";
-                html += "<span class=\"tooltip_key\">";
+                html += "<div class=\"tooltip_key\">";
                 html += id_name_map[d.id];
-                html += "</span>";
-                html += "<span class=\"tooltip_value\">";
+                html += "</div>";
+                html += "<div class=\"tooltip_value\">";
                 html += (valueById.get(d.id) ? valueFormat(valueById.get(d.id)) : "");
                 html += "";
-                html += "</span>";
+                html += "</div>";
                 html += "</div>";
 
                 $("#tooltip-container").html(html);
@@ -357,7 +357,7 @@ body {
 /* stylesheet for your custom graph */
 .states {
   fill: none;
-  stroke: #fff;
+  stroke: black;
   stroke-linejoin: round;
 }
 .states-choropleth {
@@ -369,7 +369,10 @@ body {
   color: #000;
   padding: 10px;
   border: 1px solid;
+  border-radius: 5px;
   display: none;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-size: 12px;
 }
 .tooltip_key {
   font-weight: bold;
@@ -378,9 +381,45 @@ body {
   margin-left: 20px;
   float: right;
 }
+
+.tooltip_value {
+  color: black;
+  font-family: monospace;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+
 .card.card-stats:hover {
     background-color: #dddddd;
     cursor: pointer;
     border: none;
+}
+.main-panel {
+  background-color:black;
+background-image:
+radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 </style>

@@ -59,4 +59,7 @@ export default {
 }
 </script>
 <style>
+.card-plain {
+  background-color: white;
+}
 </style>
