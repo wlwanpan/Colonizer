@@ -27,11 +27,12 @@
           </fg-input>
         </div>
         <div class="col-md-5">
-          <fg-input type="text"
+          <fg-select type="text"
                     label="AssetType"
                     placeholder="type"
+                    :options="assetTypeOptions"
                     v-model="asset.assetType">
-          </fg-input>
+          </fg-select>
         </div>
       </div>
       <div class="row">
@@ -76,10 +77,11 @@
           id: '4837493-4324343',
           value: '33333',
           description: 'a proper territory',
-          assetType: 'warner',
+          assetType: 'Industrial',
           longitude: '345.35454',
           latitude: '6873.343'
-        }
+        },
+        assetTypeOptions: ["Residential", "Industrial", "Agricultural", "Community"]
       }
     },
 
