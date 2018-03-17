@@ -6,7 +6,11 @@
 </template>
 
 <script>
-  export default {}
+export default {
+  mounted() {
+    this.$store.dispatch('loadCoinbaseAddress')
+  }
+}
 </script>
 <style lang="scss">
   .vue-notifyjs.notifications{

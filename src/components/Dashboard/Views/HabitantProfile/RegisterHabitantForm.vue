@@ -7,14 +7,14 @@
           <fg-input type="text"
                     label="First Name"
                     placeholder="First Name"
-                    v-model="user.firstName">
+                    v-model="firstName">
           </fg-input>
         </div>
         <div class="col-md-5">
           <fg-input type="text"
                     label="Last Name"
                     placeholder="Last Name"
-                    v-model="user.lastName">
+                    v-model="lastName">
           </fg-input>
         </div>
       </div>
@@ -23,14 +23,14 @@
           <fg-input type="text"
                     label="Username"
                     placeholder="Username"
-                    v-model="user.username">
+                    v-model="username">
           </fg-input>
         </div>
         <div class="col-md-5">
           <fg-input type="text"
                     label="Password"
                     placeholder="Password"
-                    v-model="user.password">
+                    v-model="password">
           </fg-input>
         </div>
       </div>
@@ -40,11 +40,10 @@
                     label="Colony"
                     placeholder="Colony"
                     :options="options"
-                    v-model="user.colony">
+                    v-model="colony">
           </fg-select>
         </div>
       </div>
-
 
       <div class="text-center">
         <button type="submit" class="btn btn-success btn-fill float-left" @click.prevent="registerHabitant">
@@ -56,34 +55,63 @@
   </card>
 </template>
 <script>
-  import Card from '@/components/UIComponents/Cards/Card.vue'
+import Card from '@/components/UIComponents/Cards/Card.vue'
 
-  export default {
-    components: {
-      Card
-    },
-    data () {
-      return {
-        user: {
-          firstName: 'James',
-          lastName: 'Wan',
-          username: 'james.wan',
-          password: '',
-          colony: ''
-        },
-        options: ["ColonyA", "ColonyB", "ColonyC"]
-      }
-    },
+export default {
+  components: {
+    Card
+  },
+  data () {
+    return {
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      colony: '',
+      options: ["ColonyA", "ColonyB", "ColonyC"]
+    }
+  },
 
-    methods: {
-      registerHabitant () {
-        var contract = this.$store.getters.getContract
-        this.$router.push('/admin/habitant-detail');
-      }
+  computed: {
+    fullName() {
+      return [this.firstName, this.lastName].join(' ')
+    }
+  },
+
+  beforeCreate () {
+    if (this.$store.getters.getHabitant.status == 'online') {
+      this.$router.push('/admin/habitant-detail')
+    }
+  },
+
+  methods: {
+    registerHabitant () {
+      var contract = this.$store.getters.getContract
+      var params = [
+        this.fullName, this.username, this.password, this.colony
+      ]
+
+      this.$store.dispatch('showLoading')
+      this.$store.dispatch(
+        'contactCall',
+        {
+          method: 'registerHabitant',
+          params
+        }
+      )
+      .then(results => {
+        let { firstName, lastName, username, password, colony } = this.$data
+        this.$store.dispatch(
+          'updateHabitant',
+          { firstName, lastName, username, password, colony }
+        )
+        this.$router.push('/admin/habitant-detail')
+      })
+      .catch(err => this.alertError(err))
+      .finally(() => this.$store.dispatch('hideLoading'))
     }
   }
-
+}
 </script>
-<style>
-
+<style lang="scss">
 </style>

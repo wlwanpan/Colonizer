@@ -35,7 +35,7 @@ window.addEventListener('load', function () {
   var colonizerContract = TruffleContract(ColonizerContract)
   colonizerContract.setProvider(window.web3.currentProvider)
 
-  const contractAddress = '0xfb0a4e5bbc481ae30826742c325ac26442cf0253'
+  const contractAddress = '0x82002f103255b870c5ad9000b04dba7146fc12f3'
 
   store.dispatch(
     'updateColonizerContract',
@@ -44,9 +44,6 @@ window.addEventListener('load', function () {
       contractAddress
     }
   )
-
-  // Test Command
-  // contract.registerHabitant('warren', 'wlwanp', '123123', 'ColonyB', {from: web3.eth.accounts[0], gas: 500000}).then((tx) => {console.log(tx)})
 
   Vue.mixin(mixins)
 

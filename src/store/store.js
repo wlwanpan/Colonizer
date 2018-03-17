@@ -9,6 +9,8 @@ Vue.use(Vuex)
 
 const state = {
 
+  showLoading: false,
+
   contract: {
 
     colonizer: undefined,
@@ -18,11 +20,12 @@ const state = {
 
   habitant: {
 
-    address: 'test',
-    firstName: 'Wa',
-    lastName: 'Wan',
-    username: 'wlw',
-    colony: 'ColonyA'
+    address: 0x0,
+    status: 'offline',
+    firstName: '',
+    lastName: '',
+    username: '',
+    colony: ''
 
   },
 
@@ -70,12 +73,14 @@ const state = {
 
 const getters = {
 
+  transactionProcessing: state => state.showLoading,
+
   getContract: state => {
     var { colonizer, address } = state.contract
     return colonizer.at(address)
   },
 
-  getHabitantOnlineCount: state => state.planet.habitantOnline,
+  getHabitantAddress: state => state.habitant.address,
 
   getHabitantRegisteredCount: state => state.planet.habitantRegistered,
 
