@@ -5,7 +5,7 @@
         <div class="col-xl-4 col-md-6">
           <stats-card>
             <div slot="header" class="icon-warning">
-              <i class="nc-icon nc-bullet-list-67 text-info"></i>
+              <i class="nc-icon nc-bullet-list-67 text-warning"></i>
             </div>
             <div slot="content">
               <p class="card-category">Assets</p>
@@ -20,7 +20,7 @@
         <div class="col-xl-4 col-md-6">
           <stats-card>
             <div slot="header" class="icon-success">
-              <i class="nc-icon nc-single-02 text-info"></i>
+              <i class="nc-icon nc-single-02 text-warning"></i>
             </div>
             <div slot="content">
               <p class="card-category">Habitants</p>
@@ -35,7 +35,7 @@
         <div class="col-xl-4 col-md-6">
           <stats-card>
             <div slot="header" class="icon-danger">
-              <i class="nc-icon nc-vector text-info"></i>
+              <i class="nc-icon nc-vector text-warning"></i>
             </div>
             <div slot="content">
               <p class="card-category">Colonies</p>
@@ -49,73 +49,12 @@
 
       </div>
       <div class="row">
-        <div class="col-md-8">
-          <chart-card :chart-data="lineChart.data"
-                      :chart-options="lineChart.options"
-                      :responsive-options="lineChart.responsiveOptions">
-            <template slot="header">
-              <h4 class="card-title">Users Behavior</h4>
-              <p class="card-category">24 Hours performance</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Click
-                <i class="fa fa-circle text-warning"></i> Click Second Time
-              </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-history"></i> Updated 3 minutes ago
-              </div>
-            </template>
-          </chart-card>
-        </div>
+        <div class="col-md-14">
+          <div id="tooltip-container"></div>
 
-        <div class="col-md-4">
-          <chart-card :chart-data="pieChart.data" chart-type="Pie">
-            <template slot="header">
-              <h4 class="card-title">Email Statistics</h4>
-              <p class="card-category">Last Campaign Performance</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
-                <i class="fa fa-circle text-danger"></i> Bounce
-                <i class="fa fa-circle text-warning"></i> Unsubscribe
-              </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-              </div>
-            </template>
-          </chart-card>
+          <div id="canvas-svg"></div>
         </div>
       </div>
-
-      <!-- <div class="row">
-        <div class="col-md-6">
-          <chart-card
-            :chart-data="barChart.data"
-            :chart-options="barChart.options"
-            :chart-responsive-options="barChart.responsiveOptions"
-            chart-type="Bar">
-            <template slot="header">
-              <h4 class="card-title">2014 Sales</h4>
-              <p class="card-category">All products including Taxes</p>
-            </template>
-            <template slot="footer">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Tesla Model S
-                <i class="fa fa-circle text-danger"></i> BMW 5 Series
-              </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-check"></i> Data information certified
-              </div>
-            </template>
-          </chart-card>
-        </div> -->
-
       </div>
     </div>
   </div>
@@ -222,7 +161,214 @@
       }
     }
   }
+
+  d3.csv("https://gist.githubusercontent.com/dnprock/5215cc464cfb9affd283/raw/61bd2efeb92db5de5dedc1ee31f4d81137301400/population.csv", function(err, data) {
+  var config = {"color1":"#a1a3a7","color2":"#141a24","stateDataColumn":"state_or_territory","valueDataColumn":"population_estimate_for_july_1_2013_number"}
+
+  var WIDTH = 800, HEIGHT = 500;
+
+  var COLOR_COUNTS = 9;
+
+  var SCALE = 0.7;
+
+  function Interpolate(start, end, steps, count) {
+      var s = start,
+          e = end,
+          final = s + (((e - s) / steps) * count);
+      return Math.floor(final);
+  }
+
+  function Color(_r, _g, _b) {
+      var r, g, b;
+      var setColors = function(_r, _g, _b) {
+          r = _r;
+          g = _g;
+          b = _b;
+      };
+
+      setColors(_r, _g, _b);
+      this.getColors = function() {
+          var colors = {
+              r: r,
+              g: g,
+              b: b
+          };
+          return colors;
+      };
+  }
+
+  function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+      } : null;
+  }
+
+  function valueFormat(d) {
+    if (d > 1000000000) {
+      return Math.round(d / 1000000000 * 10) / 10 + "B";
+    } else if (d > 1000000) {
+      return Math.round(d / 1000000 * 10) / 10 + "M";
+    } else if (d > 1000) {
+      return Math.round(d / 1000 * 10) / 10 + "K";
+    } else {
+      return d;
+    }
+  }
+
+  var COLOR_FIRST = config.color1, COLOR_LAST = config.color2;
+
+  var rgb = hexToRgb(COLOR_FIRST);
+
+  var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
+
+  rgb = hexToRgb(COLOR_LAST);
+  var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
+
+  var MAP_STATE = config.stateDataColumn;
+  var MAP_VALUE = config.valueDataColumn;
+
+  var width = WIDTH,
+      height = HEIGHT;
+
+  var valueById = d3.map();
+
+  var startColors = COLOR_START.getColors(),
+      endColors = COLOR_END.getColors();
+
+  var colors = [];
+
+  for (var i = 0; i < COLOR_COUNTS; i++) {
+    var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
+    var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
+    var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
+    colors.push(new Color(r, g, b));
+  }
+
+  var quantize = d3.scale.quantize()
+      .domain([0, 1.0])
+      .range(d3.range(COLOR_COUNTS).map(function(i) { return i }));
+
+  var path = d3.geo.path();
+
+  var svg = d3.select("#canvas-svg").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  d3.tsv("https://s3-us-west-2.amazonaws.com/vida-public/geo/us-state-names.tsv", function(error, names) {
+
+  var name_id_map = {};
+  var id_name_map = {};
+
+  for (var i = 0; i < names.length; i++) {
+    name_id_map[names[i].name] = names[i].id;
+    id_name_map[names[i].id] = names[i].name;
+  }
+
+  data.forEach(function(d) {
+    var id = name_id_map[d[MAP_STATE]];
+    valueById.set(id, +d[MAP_VALUE]);
+  });
+
+  quantize.domain([d3.min(data, function(d){ return +d[MAP_VALUE] }),
+    d3.max(data, function(d){ return +d[MAP_VALUE] })]);
+
+  d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/us.json", function(error, us) {
+    svg.append("g")
+        .attr("class", "states-choropleth")
+      .selectAll("path")
+        .data(topojson.feature(us, us.objects.states).features)
+      .enter().append("path")
+        .attr("transform", "scale(" + SCALE + ")")
+        .style("fill", function(d) {
+          if (valueById.get(d.id)) {
+            var i = quantize(valueById.get(d.id));
+            var color = colors[i].getColors();
+            return "rgb(" + color.r + "," + color.g +
+                "," + color.b + ")";
+          } else {
+            return "";
+          }
+        })
+        .attr("d", path)
+        .on("mousemove", function(d) {
+            var html = "";
+
+            html += "<div class=\"tooltip_kv\">";
+            html += "<span class=\"tooltip_key\">";
+            html += id_name_map[d.id];
+            html += "</span>";
+            html += "<span class=\"tooltip_value\">";
+            html += (valueById.get(d.id) ? valueFormat(valueById.get(d.id)) : "");
+            html += "";
+            html += "</span>";
+            html += "</div>";
+
+            $("#tooltip-container").html(html);
+            $(this).attr("fill-opacity", "0.8");
+            $("#tooltip-container").show();
+
+            var coordinates = d3.mouse(this);
+
+            var map_width = $('.states-choropleth')[0].getBoundingClientRect().width;
+
+            if (d3.event.layerX < map_width / 2) {
+              d3.select("#tooltip-container")
+                .style("top", (d3.event.layerY + 15) + "px")
+                .style("left", (d3.event.layerX + 15) + "px");
+            } else {
+              var tooltip_width = $("#tooltip-container").width();
+              d3.select("#tooltip-container")
+                .style("top", (d3.event.layerY + 15) + "px")
+                .style("left", (d3.event.layerX - tooltip_width - 30) + "px");
+            }
+        })
+        .on("mouseout", function() {
+                $(this).attr("fill-opacity", "1.0");
+                $("#tooltip-container").hide();
+            });
+
+    svg.append("path")
+        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+        .attr("class", "states")
+        .attr("transform", "scale(" + SCALE + ")")
+        .attr("d", path);
+  });
+
+  });
+});
 </script>
 <style>
-
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+/* stylesheet for your custom graph */
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+.states-choropleth {
+  fill: #ccc;
+}
+#tooltip-container {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  border: 1px solid;
+  display: none;
+}
+.tooltip_key {
+  font-weight: bold;
+}
+.tooltip_value {
+  margin-left: 20px;
+  float: right;
+}
 </style>
