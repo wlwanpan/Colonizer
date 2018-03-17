@@ -9,7 +9,7 @@
     <tr v-for="item in data">
       <slot :row="item">
         <td v-for="column in columns" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
-        <td><button type="submit" class="btn btn-success btn-fill" @click.prevent="clickBuyAsset(item)">Buy</button></td>
+        <td v-if="showBuy"><button type="submit" class="btn btn-success btn-fill" @click.prevent="clickBuyAsset(item)">Buy</button></td>
       </slot>
     </tr>
     </tbody>
@@ -20,7 +20,8 @@
     name: 'l-table',
     props: {
       columns: Array,
-      data: Array
+      data: Array,
+      showBuy: String
     },
     methods: {
       hasValue (item, column) {

@@ -67,6 +67,21 @@ const state = {
       longitude: '324251',
       latitude: '123123'
     }
+  ],
+
+  habitants: [
+    {
+      firstname: 'Warren',
+      lastname: 'Wan',
+      username: 'warren.wan',
+      colony: 'colonyA'
+    },
+    {
+      firstname: 'James',
+      lastname: 'Wan',
+      username: 'james.wan',
+      colony: 'colonyB'
+    }
   ]
 
 }
@@ -85,6 +100,8 @@ const getters = {
   getHabitantRegisteredCount: state => state.planet.habitantRegistered,
 
   getHabitant: state => state.habitant,
+
+  getHabitants: state => state.habitants,
 
   getOnSaleAssets: state => state.onSaleAssets,
 

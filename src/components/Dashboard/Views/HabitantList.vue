@@ -6,14 +6,13 @@
         <div class="col-12">
           <card class="card-plain">
             <template slot="header">
-              <h4 class="card-title">Assets for Sale</h4>
+              <h4 class="card-title">Habitants</h4>
               <p class="card-category">Here is a subtitle for this table</p>
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
                        :columns="table2.columns"
-                       :data="table2.data"
-                       :showBuy="table2.showBuy">
+                       :data="table2.data">
               </l-table>
             </div>
           </card>
@@ -26,7 +25,7 @@
 <script>
   import LTable from '@/components/UIComponents/Table.vue'
   import Card from '@/components/UIComponents/Cards/Card.vue'
-  const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+  const tableColumns = ['firstname', 'lastname', 'username', 'colony']
   const tableData = []
   export default {
     components: {
@@ -44,8 +43,7 @@
         },
         table2: {
           columns: [...tableColumns],
-          data: [...this.$store.getters.getOnSaleAssets],
-          showBuy: "true"
+          data: [...this.$store.getters.getHabitants]
         }
       }
     }
