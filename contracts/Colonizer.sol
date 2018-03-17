@@ -10,6 +10,7 @@ contract Colonizer {
     string username;
     HabitantState status;
     bytes32 passwordhash;
+    uint256 penaltyScore;
     string colony;
 
     address[] relatives;
@@ -30,13 +31,25 @@ contract Colonizer {
     string latitude;
   }
 
+  struct ColonyLaw {
+
+    uint256 penalty;
+
+    string description;
+    string colony;
+
+  }
+
   uint256 public assetCount;
   uint256 public habitantCount;
+  uint256 public colonyLawCount;
 
+  bytes32[] colonyLawKeys;
   bytes32[] assetKeys;
   address[] habitantKeys;
 
   // Mapping Storage
+  mapping (bytes32 => ColonyLaw) colonylawStorage; //
   mapping (bytes32 => Asset) assetsStorage; // store assetsStorage registered
   mapping (address => Habitant) habitantsStorage; // store user by address
 
@@ -48,7 +61,7 @@ contract Colonizer {
   function registerHabitant (string fullname, string username, string password, string colony) public {
     bytes32 passwordhash = keccak256(username, password);
 
-    habitantsStorage[msg.sender] = Habitant(fullname, username, HabitantState.online, passwordhash, colony, new address[](0));
+    habitantsStorage[msg.sender] = Habitant(fullname, username, HabitantState.online, passwordhash, 0, colony, new address[](0));
     habitantKeys.push(msg.sender);
 
     habitantCount++;
@@ -63,6 +76,14 @@ contract Colonizer {
     }
 
     habitantCount--;
+  }
+
+  function getHabitantByIndex(uint256 _index) public view returns(string fullname, uint256 penaltyScore, string colony) {
+    require(_index >= 0 && _index < habitantKeys.length);
+    address _key = habitantKeys[_index];
+    Habitant memory habitant = habitantsStorage[_key];
+
+    return(habitant.fullName, habitant.penaltyScore, habitant.colony);
   }
 
   function getCurrentState () public view returns (HabitantState) {

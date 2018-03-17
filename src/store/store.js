@@ -27,6 +27,10 @@ const state = {
 
   },
 
+  habitants: [
+
+  ],
+
   planet: {
 
     habitantOnline: 0,
@@ -37,50 +41,7 @@ const state = {
   habitantsRegistered: {},
 
   // Assets Store { assetID: {id: bytes32, value: uint256, description: string} }
-
-  assets: {},
-
-  onSaleAssets: [
-    {
-      seller: '0x00d1ae0a6fc13b9ecdefa118b94cf95ac16d4ab0',
-      value: 10,
-      description: 'First asset',
-      assetType: 'Land',
-      longitude: '362576',
-      latitude: '2352436'
-    },
-    {
-      seller: '0x1daa654cfbc28f375e0f08f329de219fff50c765',
-      value: 143,
-      description: 'Second asset',
-      assetType: 'Crop',
-      longitude: '435237',
-      latitude: '5246'
-    },
-    {
-      seller: '0xc2dbc0a6b68d6148d80273ce4d6667477dbf2aa7',
-      value: 1,
-      description: 'Third asset',
-      assetType: 'Building',
-      longitude: '324251',
-      latitude: '123123'
-    }
-  ],
-
-  habitants: [
-    {
-      firstname: 'Warren',
-      lastname: 'Wan',
-      username: 'warren.wan',
-      colony: 'colonyA'
-    },
-    {
-      firstname: 'James',
-      lastname: 'Wan',
-      username: 'james.wan',
-      colony: 'colonyB'
-    }
-  ]
+  assets: {}
 
 }
 
@@ -97,6 +58,10 @@ const getters = {
 
   getHabitantRegisteredCount: state => state.planet.habitantRegistered,
 
+  getHabitantCount: state => state.habitants.length,
+
+  getAssetCount: state => _(state.assets).keys().length,
+
   getHabitant: state => state.habitant,
 
   getHabitants: state => state.habitants,
@@ -107,8 +72,10 @@ const getters = {
     var {onSale, owned} = filter
     var output = []
     var assetDetails = _(state.assets).values()
+    var assetIDs = _(state.assets).keys()
 
-    _(assetDetails).each(asset => {
+    _(assetDetails).each((asset, index) => {
+      asset.assetId = assetIDs[index]
       if (owned && asset.owner === state.habitant.username) { return output.push(asset) }
       if (onSale && asset.onSale) { return output.push(asset) }
     })

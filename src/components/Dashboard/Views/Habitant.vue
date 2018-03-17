@@ -2,13 +2,15 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
           <register-habitant-form>
           </register-habitant-form>
           <deregister-habitant-form>
-          </deregister-habitant-form>          
+          </deregister-habitant-form>
           <get-current-state-form>
-          </get-current-state-form>                
+          </get-current-state-form>
         </div>
       </div>
     </div>

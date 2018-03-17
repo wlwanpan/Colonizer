@@ -11,14 +11,13 @@
   </div>
 </template>
 <script>
-  import EditProfileForm from './UserProfile/EditProfileForm.vue'
+import EditProfileForm from './UserProfile/EditProfileForm.vue'
 
-  export default {
-    components: {
-      EditProfileForm
-    }
+export default {
+  components: {
+    EditProfileForm
   }
-
+}
 </script>
 <style>
 

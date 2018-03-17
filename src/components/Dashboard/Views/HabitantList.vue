@@ -7,7 +7,7 @@
           <card class="card-plain">
             <template slot="header">
               <h4 class="card-title">Habitants</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
+              <p class="card-category">A Complete List of Habitants in your Colony</p>
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
@@ -23,31 +23,31 @@
   </div>
 </template>
 <script>
-  import LTable from '@/components/UIComponents/Table.vue'
-  import Card from '@/components/UIComponents/Cards/Card.vue'
-  const tableColumns = ['firstname', 'lastname', 'username', 'colony']
-  const tableData = []
-  export default {
-    components: {
-      LTable,
-      Card
-    },
-    props: {
-      selectedAsset: Object
-    },
-    data () {
-      return {
-        table1: {
-          columns: [...tableColumns],
-          data: [...tableData]
-        },
-        table2: {
-          columns: [...tableColumns],
-          data: [...this.$store.getters.getHabitants]
-        }
+import LTable from '@/components/UIComponents/Table.vue'
+import Card from '@/components/UIComponents/Cards/Card.vue'
+const tableColumns = ['Firstname', 'Lastname', 'Username', 'Colony']
+const tableData = []
+export default {
+  components: {
+    LTable,
+    Card
+  },
+  props: {
+    selectedAsset: Object
+  },
+  data () {
+    return {
+      table1: {
+        columns: [...tableColumns],
+        data: [...tableData]
+      },
+      table2: {
+        columns: [...tableColumns],
+        data: [...this.$store.getters.getHabitants]
       }
     }
   }
+}
 </script>
 <style>
 </style>

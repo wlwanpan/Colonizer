@@ -7,7 +7,7 @@
           <card class="card-plain">
             <template slot="header">
               <h4 class="card-title">Assets for Sale</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
+              <p class="card-category"></p>
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
@@ -26,7 +26,7 @@
 <script>
 import LTable from '@/components/UIComponents/Table.vue'
 import Card from '@/components/UIComponents/Cards/Card.vue'
-const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+const tableColumns = ['Owner', 'Value', 'Description', 'Asset Type', 'Longitude', 'Latitude', '']
 const tableData = []
 
 export default {

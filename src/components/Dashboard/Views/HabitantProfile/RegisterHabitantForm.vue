@@ -92,7 +92,6 @@ export default {
         }
       )
       .then(results => {
-        console.log(results)
 
         let { firstName, lastName, username, password, colony } = this.$data
         this.$store.dispatch(

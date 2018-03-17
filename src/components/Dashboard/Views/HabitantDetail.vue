@@ -2,6 +2,8 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-md-1">
+        </div>
         <div class="col-md-10">
           <user-card>
           </user-card>
@@ -11,13 +13,13 @@
   </div>
 </template>
 <script>
-  import UserCard from './HabitantProfile/UserCard.vue'
+import UserCard from './HabitantProfile/UserCard.vue'
 
-  export default {
-    components: {
-      UserCard
-    }
+export default {
+  components: {
+    UserCard
   }
+}
 
 </script>
 <style>

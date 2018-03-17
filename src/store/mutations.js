@@ -40,6 +40,16 @@ export default {
       }
     )
     state.assets = assetsOutput
+  },
+
+  UPDATE_HABITANTS (state, data) {
+    var output = _(data).map(
+      ([fullName, penalityScore, Colony]) => {
+        return ({fullName, penalityScore, Colony})
+      }
+    )
+
+    state.habitants = output
   }
 
 }
