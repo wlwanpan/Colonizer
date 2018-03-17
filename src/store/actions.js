@@ -89,6 +89,26 @@ export default {
         default:
           resolve('method not implement yet')
 
+        case 'deRegister':
+          contract.deRegister(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+
+        case 'getCurrentState':
+          contract.getCurrentState(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+
+        case 'buyAsset':
+          contract.buyAsset(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+
+        case 'sellAsset':
+          contract.sellAsset(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+          
       }
     })
     .finally(() => dispatch('hideLoading'))
