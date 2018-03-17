@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <side-bar>
-      <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/planet">
         <i class="nc-icon nc-globe-2"></i>
         <p>Planet</p>
@@ -33,13 +32,11 @@
   import TopNavbar from './TopNavbar.vue'
   import ContentFooter from './ContentFooter.vue'
   import DashboardContent from './Content.vue'
-  import MobileMenu from './MobileMenu.vue'
   export default {
     components: {
       TopNavbar,
       ContentFooter,
-      DashboardContent,
-      MobileMenu
+      DashboardContent
     },
     methods: {
       toggleSidebar () {

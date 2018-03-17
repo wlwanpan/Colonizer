@@ -17,7 +17,7 @@
       class="form-control"
       aria-describedby="addon-right addon-left">
       <option v-for="option in options">
-        {{ option.text }}
+        {{ option }}
       </option>
     </select>
     <slot></slot>
@@ -34,7 +34,7 @@
     name: 'fg-select',
     props: {
       label: String,
-      options: [String],
+      options: Array,
       value: [String, Number],
       addonRightIcon: String,
       addonLeftIcon: String

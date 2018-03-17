@@ -39,7 +39,7 @@
           <fg-select type="text"
                     label="Colony"
                     placeholder="Colony"
-                    options="options"
+                    :options="options"
                     v-model="user.colony">
           </fg-select>
         </div>
@@ -65,23 +65,19 @@
     data () {
       return {
         user: {
-          company: 'Paper Dashboard',
-          username: 'james.wan',
-          email: '',
           firstName: 'James',
           lastName: 'Wan',
-          address: 'Melbourne, Australia',
-          city: 'melbourne',
-          country: 'Australia',
-          postalCode: ''
+          username: 'james.wan',
+          password: '',
+          colony: ''
         },
-        options: [1, 2, 4]
+        options: ["ColonyA", "ColonyB", "ColonyC"]
       }
     },
 
     methods: {
       registerHabitant () {
-        alert('Your data: ' + JSON.stringify(this.user))
+        debugger
       }
     }
   }
