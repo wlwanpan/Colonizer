@@ -2,7 +2,7 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-4 col-md-6" @click.prevent="navigateAssets">
           <stats-card>
             <div slot="header" class="icon-warning">
               <i class="nc-icon nc-bullet-list-67 text-warning"></i>
@@ -17,7 +17,7 @@
           </stats-card>
         </div>
 
-        <div class="col-xl-4 col-md-6">
+        <div class="col-xl-4 col-md-6" @click.prevent="navigateHabitants">
           <stats-card>
             <div slot="header" class="icon-success">
               <i class="nc-icon nc-single-02 text-warning"></i>
@@ -252,6 +252,14 @@
       });
      });
     },
+    methods: {
+      navigateAssets() {
+        this.$router.push('/admin/market-place')
+      },
+      navigateHabitants() {
+        this.$router.push('/admin/habitant-list')
+      }
+    },
     data () {
       return {
         editTooltip: 'Edit Task',
@@ -369,5 +377,10 @@ body {
 .tooltip_value {
   margin-left: 20px;
   float: right;
+}
+.card.card-stats:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    border: none;
 }
 </style>
