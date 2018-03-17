@@ -11,14 +11,13 @@
       </sidebar-link>
       <sidebar-link to="/admin/market-place">
         <i class="nc-icon nc-money-coins"></i>
-        <p>Assets</p>
+        <p>Market</p>
       </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
 
       <dashboard-content @click="toggleSidebar">
-
       </dashboard-content>
 
       <content-footer></content-footer>

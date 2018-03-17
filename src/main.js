@@ -7,6 +7,7 @@ import mixins from '@/js/mixins'
 import routes from '@/routes/routes'
 import Web3 from 'web3'
 import TruffleContract from 'truffle-contract'
+// import ColonizerContract from '@contracts/colonizer.json'
 
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
@@ -26,6 +27,9 @@ window.addEventListener('load', function () {
     console.log('Web3 injected browser: Fail. You should consider trying MetaMask.')
     window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
   }
+
+  // var colonizerContract = TruffleContract(ColonizerContract)
+  // colonizerContract.setProvider(window.web3.currentProvider)
 
   Vue.mixin(mixins)
 

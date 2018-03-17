@@ -3,6 +3,8 @@ import Vuex from 'Vuex'
 import actions from './actions'
 import mutations from './mutations'
 
+const _ = require('underscore')
+
 Vue.use(Vuex)
 
 const state = {
@@ -20,8 +22,8 @@ const getters = {
 
   getHabitantOnlineCount: state => state.planet.habitantOnline,
   getHabitantRegisteredCount: state => state.planet.habitantRegistered,
-  getAssets: state => status => {
-
+  getAssets: state => filter => {
+    // to filter by
   }
 
 }

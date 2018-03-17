@@ -3,8 +3,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8">
-          <edit-profile-form>
-          </edit-profile-form>
+          <register-habitant-form>
+          </register-habitant-form>
         </div>
         <div class="col-md-4">
         </div>
@@ -13,11 +13,11 @@
   </div>
 </template>
 <script>
-  import EditProfileForm from './UserProfile/EditProfileForm.vue'
+  import RegisterHabitantForm from './HabitantProfile/RegisterHabitantForm.vue'
 
   export default {
     components: {
-      EditProfileForm,
+      RegisterHabitantForm,
     }
   }
 

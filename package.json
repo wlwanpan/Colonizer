@@ -18,6 +18,7 @@
     "es6-promise": "^4.1.1",
     "google-maps": "^3.2.1",
     "truffle-contract": "^3.0.4",
+    "underscore": "^1.8.3",
     "v-tooltip": "^2.0.0-rc.31",
     "vue": "^2.5.16",
     "vue-clickaway": "^2.1.0",

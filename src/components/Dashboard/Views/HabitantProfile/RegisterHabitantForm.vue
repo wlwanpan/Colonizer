@@ -77,7 +77,7 @@
 
     methods: {
       registerHabitant () {
-        debugger
+        this.$store.dispatch('')
       }
     }
   }
