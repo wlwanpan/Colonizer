@@ -1,34 +1,56 @@
 <template>
-  <card class="card-user">
-    <img slot="image" src="static/img/future.JPG" alt="..."/>
-    <div class="author">
-      <a href="#">
-        <img class="avatar border-gray" src="static/img/faces/face-0.jpg" alt="..."/>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-3 col-md-2">
+          <div class="text-center">
+            <button type="submit" class="btn btn-info btn-lg" @click.prevent="registerAssets">
+              Register Assets
+            </button>
+          </div>
+        </div>
 
-        <h4 class="title">{{firstName}} {{lastName}}<br />
-          <small>{{username}}</small>
-        </h4>
-      </a>
-    </div>
-    <p class="description text-center"> {{colony}} - {{address}}</p>
+        <div class="col-xl-3 col-md-2">
+          <div class="text-center">
+            <button type="submit" class="btn btn-info btn-lg" @click.prevent="registerAssets">
+              Register Colony
+            </button>
+          </div>
+        </div>
 
-    <!-- <div slot="footer" class="text-center">
-      <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
-      <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
-      <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
-    </div> -->
-    <div class="text-center">
-      <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="registerAssets">
-        Register Assets
-      </button>
+      </div>
+      <div class="row">
+        <card class="card-user">
+          <img slot="image" src="static/img/future.JPG" alt="..."/>
+          <div class="author">
+            <a href="#">
+              <img class="avatar border-gray" src="static/img/faces/face-0.jpg" alt="..."/>
+
+              <h4 class="title">{{firstName}} {{lastName}}<br />
+                <small>{{username}}</small>
+              </h4>
+            </a>
+          </div>
+          <p class="description text-center"> {{colony}} - {{address}}</p>
+
+          <!-- <div slot="footer" class="text-center">
+            <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+            <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+            <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+          </div> -->
+
+        </card>
     </div>
-  </card>
+    </div>
+</div>
 </template>
 <script>
   import Card from '@/components/UIComponents/Cards/Card.vue'
+  import StatsCard from '@/components/UIComponents/Cards/StatsCard.vue'
   export default {
     components: {
-      Card
+      Card,
+      StatsCard
     },
     data () {
       return {
@@ -74,5 +96,8 @@
 <style>
 .card-image img {
   margin-top: -200px !important;
+}
+.col-xl-3 {
+  margin-bottom: 15px;
 }
 </style>
