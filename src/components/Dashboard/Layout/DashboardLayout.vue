@@ -2,27 +2,18 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/overview">
+      <sidebar-link to="/admin/planet">
         <i class="nc-icon nc-globe-2"></i>
         <p>Planet</p>
       </sidebar-link>
-      <sidebar-link to="/admin/user">
+      <sidebar-link to="/admin/habitant">
         <i class="nc-icon nc-circle-09"></i>
         <p>Habitant</p>
       </sidebar-link>
-      <sidebar-link to="/admin/table-list">
+      <sidebar-link to="/admin/market-place">
         <i class="nc-icon nc-money-coins"></i>
         <p>Assets</p>
       </sidebar-link>
-      <!-- Commenting those out - could be a references for style purposes in the future -->
-      <!-- <sidebar-link to="/admin/typography">
-        <i class="nc-icon nc-paper-2"></i>
-        <p>Typography</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/icons">
-        <i class="nc-icon nc-atom"></i>
-        <p>Icons</p>
-      </sidebar-link> -->
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

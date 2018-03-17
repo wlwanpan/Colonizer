@@ -47,8 +47,8 @@
 
 
       <div class="text-center">
-        <button type="submit" class="btn btn-info btn-fill float-left" @click.prevent="updateProfile">
-          Register Profile
+        <button type="submit" class="btn btn-info btn-fill float-left" @click.prevent="registerHabitant">
+          Register Habitant
         </button>
       </div>
       <div class="clearfix"></div>
@@ -78,9 +78,9 @@
         options: [1, 2, 4]
       }
     },
-    
+
     methods: {
-      updateProfile () {
+      registerHabitant () {
         alert('Your data: ' + JSON.stringify(this.user))
       }
     }

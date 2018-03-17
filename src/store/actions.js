@@ -5,4 +5,6 @@ export default {
     commit('CHANGE_DAPP_TITLE', newTitle)
   }
 
+
+
 }

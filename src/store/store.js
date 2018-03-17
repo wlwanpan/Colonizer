@@ -7,13 +7,22 @@ Vue.use(Vuex)
 
 const state = {
 
-  DappTitle: "Welcome to your truffle-vue dApp."
+  planet: {
+    habitantOnline: 0,
+    habitantRegistered: 0
+  },
+  habitantsRegistered: {},
+  assets: []
 
 }
 
 const getters = {
 
-  getDappTitle: state => state.DappTitle
+  getHabitantOnlineCount: state => state.planet.habitantOnline,
+  getHabitantRegisteredCount: state => state.planet.habitantRegistered,
+  getAssets: state => status => {
+
+  }
 
 }
 

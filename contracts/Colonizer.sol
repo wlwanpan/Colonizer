@@ -1,3 +1,4 @@
+pragma solidity ^0.4.18;
 
 contract Colonizer {
 
@@ -18,36 +19,30 @@ contract Colonizer {
 
   struct Asset {
 
+    bytes32 id;
     string description;
-    string type;
+    string assetType;
     bytes32 longitude;
     bytes32 latitude;
 
   }
 
-  mapping (address => Asset) assets; // store assets registered
+  mapping (bytes32 => Asset) assets; // store assets registered
   mapping (address => Habitant) habitants; // store user by address
 
-  function registerHabitant (string fullname, string username, string password, string colony) {
+  function registerHabitant (string fullname, string username, string password, string colony) public {
     // register an account with from using struct above
-    msg.sender = address = Habitant()
-
-    habitants[msg.sender] = Habitant()
-
   }
 
-  function loginHabitant (string username, string password) {
+  function loginHabitant (string _username, string _password) public {
     // login account and increment online user count
-    bytes hash = keccab(username, password);
-
   }
 
-  function logoutHabitant () {
+  function logoutHabitant () public {
     // louout and decrement online user count
-
   }
 
-  function deRegister () {
+  function deRegister () public {
 
   }
 

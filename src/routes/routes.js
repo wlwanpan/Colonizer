@@ -1,15 +1,8 @@
 import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
-// GeneralViews
-import NotFound from '../components/GeneralViews/NotFoundPage.vue'
 
-// Admin pages
-import Overview from '@/components/Dashboard/Views/Overview.vue'
-import UserProfile from '@/components/Dashboard/Views/UserProfile.vue'
-import TableList from '@/components/Dashboard/Views/TableList.vue'
-import Typography from '@/components/Dashboard/Views/Typography.vue'
-import Icons from '@/components/Dashboard/Views/Icons.vue'
-import Maps from '@/components/Dashboard/Views/Maps.vue'
-import Notifications from '@/components/Dashboard/Views/Notifications.vue'
+import Planet from '@/components/Dashboard/Views/Planet.vue'
+import Habitant from '@/components/Dashboard/Views/Habitant.vue'
+import MarketPlace from '@/components/Dashboard/Views/MarketPlace.vue'
 
 const routes = [
   {
@@ -23,52 +16,22 @@ const routes = [
     redirect: '/admin/overview',
     children: [
       {
-        path: 'overview',
-        name: 'Overview',
-        component: Overview
+        path: 'planet',
+        name: 'Planet',
+        component: Planet
       },
       {
-        path: 'user',
-        name: 'User',
-        component: UserProfile
+        path: 'habitant',
+        name: 'Habitant',
+        component: Habitant
       },
       {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
+        path: 'market-place',
+        name: 'MarketPlace',
+        component: MarketPlace
       }
     ]
-  },
-  { path: '*', component: NotFound }
+  }
 ]
-
-/**
- * Asynchronously load view (Webpack Lazy loading compatible)
- * The specified component must be inside the Views folder
- * @param  {string} name  the filename (basename) of the view to load.
-function view(name) {
-   var res= require('../components/Dashboard/Views/' + name + '.vue');
-   return res;
-};**/
 
 export default routes

@@ -6,16 +6,12 @@
     <div class="sidebar-wrapper">
       <div class="logo">
         <a href="#" class="simple-text">
-            <!-- <div class="logo-img">
-                <img src="static/img/vue-logo.png" alt="">
-            </div> -->
           {{title}}
         </a>
       </div>
 
       <slot name="content"></slot>
       <ul class="nav">
-        <!--By default vue-router adds an active class to each route link. This way the links are colored when clicked-->
         <slot>
           <sidebar-link v-for="(link,index) in sidebarLinks"
                         :key="link.name + index"

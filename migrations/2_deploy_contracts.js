@@ -1,5 +1,5 @@
-var Users = artifacts.require("./Users.sol");
+var Colonizer = artifacts.require("./Colonizer.sol")
 
 module.exports = function(deployer) {
-  deployer.deploy(Users);
-};
+  deployer.deploy(Colonizer)
+}
