@@ -34,13 +34,13 @@ window.addEventListener('load', function () {
 
   // var colonizerContract = TruffleContract(ColonizerContract)
   // colonizerContract.setProvider(window.web3.currentProvider)
-  store.dispatch(
-    'updateColonizerContract',
-    {
-      colonizerContract,
-      contractAddress: ''
-    }
-  )
+  // store.dispatch(
+  //   'updateColonizerContract',
+  //   {
+  //     colonizerContract,
+  //     contractAddress: ''
+  //   }
+  // )
 
   Vue.mixin(mixins)
 

@@ -5,15 +5,12 @@
       <a href="#">
         <img class="avatar border-gray" src="static/img/faces/face-0.jpg" alt="..."/>
 
-        <h4 class="title">Mike Andrew<br />
-          <small>michael24</small>
+        <h4 class="title">{{firstName}} {{lastName}}<br />
+          <small>{{username}}</small>
         </h4>
       </a>
     </div>
-    <p class="description text-center"> "Lamborghini Mercy <br>
-      Your chick she so thirsty <br>
-      I'm in that two seat Lambo"
-    </p>
+    <p class="description text-center"> {{colony}} - {{address}}</p>
 
     <!-- <div slot="footer" class="text-center">
       <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
@@ -30,6 +27,11 @@
     },
     data () {
       return {
+        firstName: this.$store.getters.getHabitant.firstName,
+        lastName: this.$store.getters.getHabitant.lastName,
+        username: this.$store.getters.getHabitant.username,
+        colony: this.$store.getters.getHabitant.colony,
+        address: this.$store.getters.getHabitant.address,
         details: [
           {
             title: '12',
