@@ -11,7 +11,7 @@ import routes from '@/routes/routes'
 
 import Web3 from 'web3'
 import TruffleContract from 'truffle-contract'
-// import ColonizerContract from '@contracts/colonizer.json'
+import ColonizerContract from '@contracts/Colonizer.json'
 
 Vue.use(VueRouter)
 Vue.use(LightBootstrap)
@@ -32,15 +32,21 @@ window.addEventListener('load', function () {
     window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
   }
 
-  // var colonizerContract = TruffleContract(ColonizerContract)
-  // colonizerContract.setProvider(window.web3.currentProvider)
-  // store.dispatch(
-  //   'updateColonizerContract',
-  //   {
-  //     colonizerContract,
-  //     contractAddress: ''
-  //   }
-  // )
+  var colonizerContract = TruffleContract(ColonizerContract)
+  colonizerContract.setProvider(window.web3.currentProvider)
+
+  const contractAddress = '0xfb0a4e5bbc481ae30826742c325ac26442cf0253'
+
+  store.dispatch(
+    'updateColonizerContract',
+    {
+      colonizerContract,
+      contractAddress
+    }
+  )
+
+  // Test Command
+  // contract.registerHabitant('warren', 'wlwanp', '123123', 'ColonyB', {from: web3.eth.accounts[0], gas: 500000}).then((tx) => {console.log(tx)})
 
   Vue.mixin(mixins)
 

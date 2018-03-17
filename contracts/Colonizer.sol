@@ -2,6 +2,7 @@ pragma solidity ^0.4.18;
 contract Colonizer {
 
   enum HabitantState { offline, online, archieved }
+  enum AssetType { Residential, Industrial, Agricultural, Community }
 
   struct Habitant {
 
@@ -23,14 +24,17 @@ contract Colonizer {
     bool valid;
     bool onSale;
 
+    AssetType assetType;
+
     string description;
-    string assetType;
     string longitude;
     string latitude;
   }
 
+  // Mapping Storage
   mapping (bytes32 => Asset) assetsStorage; // store assetsStorage registered
   mapping (address => Habitant) habitantsStorage; // store user by address
+
   // Function Modifiers
   modifier habitantValid() { require(true);_; }
   modifier assetValid(bytes32 _id) { require(assetsStorage[_id].valid);_; }
@@ -65,9 +69,19 @@ contract Colonizer {
 
   function registerAsset(uint256 _value, string _description, string _assetType, string _longitude, string _latitude)
   public habitantValid {
-    Habitant storage currentHabitant = habitantsStorage[msg.sender];
-
     var assetId = keccak256(_assetType, _longitude, _latitude);
+
+    AssetType //{ Residential, Industrial, Agricultural, Community }
+    if (_assetType == 'Residential') {
+
+    }
+    else if (_assetType == Industrial) {
+
+    }
+    else if (_assetType == Agricultural) {
+
+    }
+    else if ()
 
     assetsStorage[assetId] = Asset({
       owner: msg.sender,
@@ -92,8 +106,8 @@ contract Colonizer {
     currentAsset.onSale = false;
   }
 
-  function sellAsset(bytes32 _assetId) public habitantValid assetValid(_assetId) {
+  /* function sellAsset(bytes32 _assetId) public habitantValid assetValid(_assetId) {
     Asset storage currentAsset = assetsStorage[_assetId];
-  }
+  } */
 
 }

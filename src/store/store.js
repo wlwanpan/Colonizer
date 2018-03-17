@@ -11,8 +11,8 @@ const state = {
 
   contract: {
 
-    colonizer: '',
-    address: ''
+    colonizer: undefined,
+    address: 0x0
 
   },
 
@@ -69,6 +69,11 @@ const state = {
 }
 
 const getters = {
+
+  getContract: state => {
+    var { colonizer, address } = state.contract
+    return colonizer.at(address)
+  },
 
   getHabitantOnlineCount: state => state.planet.habitantOnline,
 

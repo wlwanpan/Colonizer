@@ -77,6 +77,7 @@
 
     methods: {
       registerHabitant () {
+        var contract = this.$store.getters.getContract
         this.$router.push('/admin/habitant-detail');
       }
     }
