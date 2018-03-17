@@ -1,20 +1,22 @@
 <template>
   <footer class="footer">
     <div class="container-fluid">
-      <nav>
-        <ul class="footer-menu">
-          <li>
-            <router-link :to="{path:'/admin'}">Dashboard</router-link>
-          </li>
-        </ul>
-      </nav>
+      Contract Address: {{ address }}
       <div class="copyright text-center">
       </div>
     </div>
   </footer>
 </template>
 <script>
-  export default {}
+export default {
+
+  data() {
+    return {
+      address: ''
+    }
+  }
+
+}
 
 </script>
 <style>

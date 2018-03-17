@@ -7,7 +7,7 @@
           <card class="card-plain">
             <template slot="header">
               <h4 class="card-title">Assets for Sale</h4>
-              <p class="card-category">Here is a subtitle for this table</p>
+              <p class="card-category"></p>
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"

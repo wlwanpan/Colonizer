@@ -37,7 +37,7 @@ export default {
     var contractOption = { from: state.habitant.address, gas: 500000 }
 
     // Send ETH to contract of provides a value
-    if (value) { contractOption.value = window.web3.toBigNumber(value) }
+    if (value) { contractOption.value = window.web3.toWei(value) }
 
     return new Promise((resolve, reject) => {
 
@@ -48,11 +48,13 @@ export default {
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
           break
+
         case 'registerAsset':
           contract.registerAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
           break
+
         case 'loadAssets':
           var promiseOutput = []
 
@@ -76,6 +78,14 @@ export default {
             })
           })
           break
+
+        case 'loadHabitant':
+          contract.habitantCount(contractOption)
+          .then(habitantCount => {
+
+          })
+          break
+
         default:
           resolve('method not implement yet')
 

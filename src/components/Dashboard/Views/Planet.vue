@@ -410,7 +410,6 @@ body {
 .card.card-stats:hover {
     background-color: #dddddd;
     cursor: pointer;
-    border: none;
 }
 .main-panel {
   background-color:black;
