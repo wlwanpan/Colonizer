@@ -9,7 +9,7 @@
     "start": "cross-env ENABLE_ESLINT=true node scripts/dev-server.js",
     "build": "cross-env ENABLE_ESLINT=true node scripts/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test": "npm run unit",
+    "test": "mocha",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
@@ -24,7 +24,11 @@
     "vue-notifyjs": "^0.2.0",
     "vue-router": "^3.0.1",
     "vue2-google-maps": "^0.8.4",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "ganache-cli": "^6.0.3",
+    "solc": "^0.4.19",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "^1.0.0-beta.26"    
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

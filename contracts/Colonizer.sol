@@ -11,7 +11,7 @@ contract Colonizer {
     bytes32 passwordhash;
     string colony;
 
-    address[] assets;
+    bytes32[] assets;
     address[] relatives;
 
   }
@@ -22,11 +22,11 @@ contract Colonizer {
     string type;
     bytes32 longitude;
     bytes32 latitude;
-
+    bytes32 id;
   }
 
-  mapping (address => Asset) assets; // store assets registered
-  mapping (address => Habitant) habitants; // store user by address
+  mapping (bytes32 => Asset) assets; // store assets registered
+  mapping (bytes32 => Habitant) habitants; // store user by address
 
   function registerHabitant (string fullname, string username, string password, string colony) {
     // register an account with from using struct above
