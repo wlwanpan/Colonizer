@@ -47,7 +47,7 @@
 
 
       <div class="text-center">
-        <button type="submit" class="btn btn-info btn-fill float-left" @click.prevent="updateProfile">
+        <button type="submit" class="btn btn-success btn-fill float-left" @click.prevent="updateProfile">
           Register Profile
         </button>
       </div>
