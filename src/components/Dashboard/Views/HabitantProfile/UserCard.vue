@@ -17,6 +17,11 @@
       <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
       <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
     </div> -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="registerAssets">
+        Register Assets
+      </button>
+    </div>
   </card>
 </template>
 <script>
@@ -58,6 +63,9 @@
         } else {
           return 'col-md-3'
         }
+      },
+      registerAssets () {
+          this.$router.push('/admin/assets-form');
       }
     }
   }
