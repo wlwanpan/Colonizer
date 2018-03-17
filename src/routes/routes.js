@@ -2,6 +2,7 @@ import DashboardLayout from '../components/Dashboard/Layout/DashboardLayout.vue'
 
 import Planet from '@/components/Dashboard/Views/Planet.vue'
 import Habitant from '@/components/Dashboard/Views/Habitant.vue'
+import HabitantDetail from '@/components/Dashboard/Views/HabitantDetail.vue'
 import MarketPlace from '@/components/Dashboard/Views/MarketPlace.vue'
 
 const routes = [
@@ -29,6 +30,11 @@ const routes = [
         path: 'market-place',
         name: 'MarketPlace',
         component: MarketPlace
+      },
+      {
+        path: 'habitant-detail',
+        name: 'Habitant Detail',
+        component: HabitantDetail
       }
     ]
   }

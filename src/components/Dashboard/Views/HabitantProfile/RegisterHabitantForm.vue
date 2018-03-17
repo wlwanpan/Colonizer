@@ -77,7 +77,7 @@
 
     methods: {
       registerHabitant () {
-        this.$store.dispatch('')
+        this.$router.push('/admin/habitant-detail');
       }
     }
   }
