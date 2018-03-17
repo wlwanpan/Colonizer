@@ -1,8 +1,9 @@
 
 export default {
 
-  CHANGE_DAPP_TITLE (state, newTitle) {
-    state.DappTitle = newTitle
+  INIT_COLONIZER_CONTRACT (state, contractDetails) {
+    var {colonizerContract, contractAddress}  = contractDetails
+    state.contract.colonizer
   }
 
 }

@@ -1,10 +1,9 @@
 
 export default {
 
-  changeDappTitle ({ commit }, newTitle) {
-    commit('CHANGE_DAPP_TITLE', newTitle)
+  // Store init contract and address
+  updateColonizerContract ({commit}, contractDetails) {
+    commit('INIT_COLONIZER_CONTRACT', contractDetails)
   }
-
-
 
 }

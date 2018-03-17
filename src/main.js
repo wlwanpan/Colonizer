@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App.vue'
+
 import LightBootstrap from './light-bootstrap-main'
-import store from '@/store/store'
+
 import mixins from '@/js/mixins'
+
+import store from '@/store/store'
 import routes from '@/routes/routes'
+
 import Web3 from 'web3'
 import TruffleContract from 'truffle-contract'
 // import ColonizerContract from '@contracts/colonizer.json'
@@ -30,6 +34,13 @@ window.addEventListener('load', function () {
 
   // var colonizerContract = TruffleContract(ColonizerContract)
   // colonizerContract.setProvider(window.web3.currentProvider)
+  store.dispatch(
+    'updateColonizerContract',
+    {
+      colonizerContract,
+      contractAddress: ''
+    }
+  )
 
   Vue.mixin(mixins)
 
