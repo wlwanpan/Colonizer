@@ -47,7 +47,7 @@ const state = {
       assetType: 'Land',
       longitude: '362576',
       latitude: '2352436'
-    }
+    },
     '2': {
       seller: '0x1daa654cfbc28f375e0f08f329de219fff50c765',
       value: 143,
@@ -55,7 +55,7 @@ const state = {
       assetType: 'Crop',
       longitude: '435237',
       latitude: '5246'
-    }
+    },
     '2': {
       seller: '0xc2dbc0a6b68d6148d80273ce4d6667477dbf2aa7',
       value: 1,
