@@ -72,8 +72,10 @@ const getters = {
     var {onSale, owned} = filter
     var output = []
     var assetDetails = _(state.assets).values()
+    var assetIDs = _(state.assets).keys()
 
-    _(assetDetails).each(asset => {
+    _(assetDetails).each((asset, index) => {
+      asset.assetId = assetIDs[index]
       if (owned && asset.owner === state.habitant.username) { return output.push(asset) }
       if (onSale && asset.onSale) { return output.push(asset) }
     })
