@@ -41,7 +41,7 @@ window.addEventListener('load', function () {
   colonizerContract.setProvider(window.web3.currentProvider)
 
   // const testnetContractAddress = '0xa922202e3830aa5bc088652db8774cb975762a40'
-  const contractAddress = '0x4df26ef7e311856e0f08b50584537dfec84d1b09'
+  const contractAddress = '0xd81db717bf139dacb2f3c1df52b81ca223f5952d'
 
   store.dispatch(
     'updateColonizerContract',

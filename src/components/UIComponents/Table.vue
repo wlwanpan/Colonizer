@@ -10,6 +10,7 @@
       <slot :row="item">
         <td v-for="column in columns" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
         <td v-if="showBuy"><button type="submit" class="btn btn-success btn-fill" @click.prevent="clickBuyAsset(item)">Buy</button></td>
+        <td v-if="showSell"><button type="submit" class="btn btn-success btn-fill" @click.prevent="clickSellAsset(item)">Sell</button></td>
       </slot>
     </tr>
     </tbody>
@@ -21,7 +22,8 @@
     props: {
       columns: Array,
       data: Array,
-      showBuy: String
+      showBuy: String,
+      showSell: String
     },
     methods: {
       hasValue (item, column) {
@@ -33,6 +35,32 @@
       clickBuyAsset(asset) {
         // TODO: need to buy some assets
         alert("gonnna buy this asset")
+      },
+      clickSellAsset(asset) {
+        // TODO: need to buy some assets
+        alert("gonnna sell this asset" + asset.assetId)
+        var params = [
+          asset.assetId,
+          this.toBigNumber(asset.value)
+        ]
+
+        this.$store.dispatch(
+          'contactCall',
+          {
+            method: 'sellAsset',
+            params
+          }
+        )
+        .then(results => {
+          console.log(results)
+
+          let { assetId, value } = this.$data
+          this.$store.dispatch(
+            'updateAssets',
+            { assetId, value }
+          )
+          this.$router.push('/admin/habitant-detail')
+        })
       }
     }
   }

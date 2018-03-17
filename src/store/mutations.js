@@ -24,6 +24,7 @@ export default {
   },
 
   UPDATE_ASSETS (state, data) {
+    console.log(data)
     if (data.length == 0) return
     var assetsOutput = _(state.assets).clone()
     // string ownerUsername, string colony, uint256 value, bool onSale, string assetType, string description, string longitude, string latitude

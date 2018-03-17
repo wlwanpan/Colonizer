@@ -9,6 +9,10 @@ export default {
     commit('UPDATE_HABITANT', habitantDetails)
   },
 
+  updateAssets ({ commit }, assetDetails) {
+    commit('UPDATE_ASSETS', assetDetails)
+  },
+
   updateColonizerContract ({ commit }, contractDetails) {
     commit('INIT_COLONIZER_CONTRACT', contractDetails)
   },
