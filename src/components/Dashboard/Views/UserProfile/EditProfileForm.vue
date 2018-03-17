@@ -39,7 +39,7 @@
           <fg-select type="text"
                     label="Colony"
                     placeholder="Colony"
-                    options="options"
+                    :options="options"
                     v-model="user.colony">
           </fg-select>
         </div>
@@ -75,10 +75,10 @@
           country: 'Australia',
           postalCode: ''
         },
-        options: [1, 2, 4]
+        options: ["ColonyA", "ColonyB", "ColonyC"]
       }
     },
-    
+
     methods: {
       updateProfile () {
         alert('Your data: ' + JSON.stringify(this.user))
