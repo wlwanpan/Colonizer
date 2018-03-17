@@ -2,11 +2,11 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
           <register-assets-form>
           </register-assets-form>
-        </div>
-        <div class="col-md-4">
         </div>
       </div>
     </div>

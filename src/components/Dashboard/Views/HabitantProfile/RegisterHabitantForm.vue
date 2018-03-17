@@ -3,14 +3,14 @@
     <h4 slot="header" class="card-title">Register new habitant</h4>
     <form>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <fg-input type="text"
                     label="First Name"
                     placeholder="First Name"
                     v-model="firstName">
           </fg-input>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <fg-input type="text"
                     label="Last Name"
                     placeholder="Last Name"
@@ -19,14 +19,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <fg-input type="text"
                     label="Username"
                     placeholder="Username"
                     v-model="username">
           </fg-input>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <fg-input type="text"
                     label="Password"
                     placeholder="Password"
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <fg-select type="text"
                     label="Colony"
                     placeholder="Colony"
@@ -78,12 +78,6 @@ export default {
     }
   },
 
-  beforeCreate () {
-    if (this.$store.getters.getHabitant.status == 'online') {
-      this.$router.push('/admin/habitant-detail')
-    }
-  },
-
   methods: {
     registerHabitant () {
       var contract = this.$store.getters.getContract
@@ -91,7 +85,6 @@ export default {
         this.fullName, this.username, this.password, this.colony
       ]
 
-      this.$store.dispatch('showLoading')
       this.$store.dispatch(
         'contactCall',
         {
@@ -100,6 +93,8 @@ export default {
         }
       )
       .then(results => {
+        console.log(results)
+
         let { firstName, lastName, username, password, colony } = this.$data
         this.$store.dispatch(
           'updateHabitant',
@@ -107,8 +102,6 @@ export default {
         )
         this.$router.push('/admin/habitant-detail')
       })
-      .catch(err => this.alertError(err))
-      .finally(() => this.$store.dispatch('hideLoading'))
     }
   }
 }

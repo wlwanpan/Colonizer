@@ -2,25 +2,29 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <register-habitant-form>
           </register-habitant-form>
-        </div>
-        <div class="col-md-4">
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-  import RegisterHabitantForm from './HabitantProfile/RegisterHabitantForm.vue'
+import RegisterHabitantForm from './HabitantProfile/RegisterHabitantForm.vue'
 
-  export default {
-    components: {
-      RegisterHabitantForm,
+export default {
+
+  components: {
+    RegisterHabitantForm,
+  },
+
+  beforeMount () {
+    if (this.$store.getters.getHabitant.status == 'online') {
+      this.$router.push('/admin/habitant-detail')
     }
   }
-
+}
 </script>
 <style>
 

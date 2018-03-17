@@ -28,28 +28,40 @@ export default {
 
   // Contract Calls
 
-  contactCall ({ commit, state }, { method, params, value }) {
+  contactCall ({ commit, state, dispatch }, { method, params, value }) {
+    dispatch('showLoading')
+
     var { colonizer, address } = state.contract
     var contract = colonizer.at(address)
     var contractOption = { from: state.habitant.address, gas: 500000 }
 
-    switch (method) {
-      // Habitant Method Call
-      case 'registerHabitant':
-        return contract.registerHabitant(...params, contractOption)
-        .then((transaction) => {
-          return transaction
-        })
+    // Send ETH to contract of provides a value
+    if (value) { contractOption.value = window.web3.toBigNumber(value) }
 
-      case 'deRegister':
-        // implement deregister
+    return new Promise((resolve, reject) => {
 
-      case 'getCurrentState':
-        // implement get current state
+      switch (method) {
+        // Habitant Method Call
+        case 'registerHabitant':
+          contract.registerHabitant(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+
+        case 'registerAsset':
+          contract.registerAsset(...params, contractOption)
+          .then(transaction => resolve(transaction))
+          .catch(err => reject(err))
+
+        case 'deRegister':
+          // implement deregister
+
+        case 'getCurrentState':
+          // implement get current state
 
 
-    }
-
+      }
+    })
+    .finally(() => dispatch('hideLoading'))
   }
 
 }

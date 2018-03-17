@@ -30,6 +30,9 @@ contract Colonizer {
     string latitude;
   }
 
+  bytes32[] assetKeys;
+  address[] habitantKeys;
+
   // Mapping Storage
   mapping (bytes32 => Asset) assetsStorage; // store assetsStorage registered
   mapping (address => Habitant) habitantsStorage; // store user by address
@@ -43,6 +46,7 @@ contract Colonizer {
     bytes32 passwordhash = keccak256(username, password);
 
     habitantsStorage[msg.sender] = Habitant(fullname, username, HabitantState.online, passwordhash, colony, new address[](0));
+    habitantKeys.push(msg.sender);
   }
 
   function deRegister (string username, string password) public {
@@ -58,15 +62,27 @@ contract Colonizer {
     return habitantsStorage[msg.sender].status;
   }
 
+  function getAssetTypeFromIndex(uint256 _index) pure private returns (AssetType) {
+    if (_index == 0) { return AssetType.Residential; }
+    else if (_index == 1) { return AssetType.Industrial; }
+    else if (_index == 2) { return AssetType.Agricultural; }
+    else if (_index == 3) { return AssetType.Community; }
+    else { return AssetType.Other; }
+  }
+
+  function convertAssetTypeToString(AssetType _type) pure private returns (string) {
+    if (_type == AssetType.Residential) return('Residential');
+    else if (_type == AssetType.Industrial) return('Industrial');
+    else if (_type == AssetType.Agricultural) return('Agricultural');
+    else if (_type == AssetType.Community) return('Community');
+    else return('Other');
+  }
+
   function registerAsset(uint256 _value, string _description, uint256 _assetType, string _longitude, string _latitude)
   public habitantOnline {
     var assetId = keccak256(_assetType, _longitude, _latitude);
 
-    AssetType assetType = AssetType.Other;
-    if (_assetType == 0) { assetType = AssetType.Residential; }
-    else if (_assetType == 1) { assetType = AssetType.Industrial; }
-    else if (_assetType == 2) { assetType = AssetType.Agricultural; }
-    else if (_assetType == 3) { assetType = AssetType.Community; }
+    AssetType assetType = getAssetTypeFromIndex(_assetType);
 
     assetsStorage[assetId] = Asset({
       owner: msg.sender,
@@ -78,7 +94,7 @@ contract Colonizer {
       longitude: _longitude,
       latitude: _latitude
     });
-
+    assetKeys.push(assetId);
   }
 
   function buyAsset(bytes32 _assetId) public payable assetValid(_assetId) {
@@ -103,6 +119,21 @@ contract Colonizer {
 
   function delistAsset(bytes32 _assetId) public assetValid(_assetId) isAssetOwner(_assetId) {
     assetsStorage[_assetId].onSale = false;
+  }
+
+  function getAssetByIndex(uint256 _index) public view returns(
+    string ownerUsername, string colony, uint256 value, bool onSale,
+    string assetType, string description, string longitude, string latitude
+  ){
+    require(_index >= 0 && _index < assetKeys.length);
+    bytes32 _key = assetKeys[_index];
+    Asset memory asset = assetsStorage[_key];
+    Habitant memory owner = habitantsStorage[asset.owner];
+
+    return(
+      owner.username, owner.colony, asset.value, asset.onSale,
+      convertAssetTypeToString(asset.assetType), asset.description, asset.longitude, asset.latitude
+    );
   }
 
 }
