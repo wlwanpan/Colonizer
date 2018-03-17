@@ -26,7 +26,7 @@
 <script>
 import LTable from '@/components/UIComponents/Table.vue'
 import Card from '@/components/UIComponents/Cards/Card.vue'
-const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+const tableColumns = ['Owner', 'Value', 'Description', 'Asset Type', 'Longitude', 'Latitude', '']
 const tableData = []
 
 export default {

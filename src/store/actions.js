@@ -79,36 +79,54 @@ export default {
           })
           break
 
-        case 'loadHabitant':
+        case 'loadHabitants':
+          var promiseOutput = []
+
           contract.habitantCount(contractOption)
           .then(habitantCount => {
-
+            _(_.range(habitantCount)).each((index) => {
+              promiseOutput.push(
+                new Promise((resolve, reject) => {
+                  contract.getHabitantByIndex.call(web3.toBigNumber(index))
+                  .then(data => resolve(data))
+                })
+              )
+            })
+            Promise.all(promiseOutput).then(data => {
+              commit('UPDATE_HABITANTS', data)
+              resolve(data)
+            })
           })
+          .catch(err => reject(err))
           break
-
-        default:
-          resolve('method not implement yet')
 
         case 'deRegister':
           contract.deRegister(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
+          break
 
         case 'getCurrentState':
           contract.getCurrentState(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
+          break
 
         case 'buyAsset':
           contract.buyAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
+          break
 
         case 'sellAsset':
           contract.sellAsset(...params, contractOption)
           .then(transaction => resolve(transaction))
           .catch(err => reject(err))
-          
+          break
+
+        default:
+          resolve('method not implement yet')
+
       }
     })
     .finally(() => dispatch('hideLoading'))

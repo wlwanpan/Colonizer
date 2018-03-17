@@ -8,9 +8,9 @@
           <register-habitant-form>
           </register-habitant-form>
           <deregister-habitant-form>
-          </deregister-habitant-form>          
+          </deregister-habitant-form>
           <get-current-state-form>
-          </get-current-state-form>                
+          </get-current-state-form>
         </div>
       </div>
     </div>

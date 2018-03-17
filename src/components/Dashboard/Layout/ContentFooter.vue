@@ -12,13 +12,17 @@ export default {
 
   data() {
     return {
-      address: ''
+      address: this.$store.state.contract.address
     }
   }
 
 }
-
 </script>
-<style>
+<style lang="scss" scoped>
+.container-fluid {
+  margin: 20px 10px;
+  font-size: 16px;
+  color: #888888;
+}
 
 </style>
