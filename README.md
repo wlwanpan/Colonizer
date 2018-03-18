@@ -13,6 +13,7 @@ Deployed: https://missionhack-colonizer.herokuapp.com
 - Truffle
 - Solc
 - web3js
+- Remix
 - D3js
 - Underscore
 - Vue2js
