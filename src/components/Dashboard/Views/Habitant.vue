@@ -36,7 +36,7 @@ export default {
   },
 
   mounted () {
-    if (this.$store.getters.getHabitant.status === 'online') {
+    if (this.$store.state.habitant.status == 'online') {
       this.$router.push('/admin/habitant-detail')
     }
     else {

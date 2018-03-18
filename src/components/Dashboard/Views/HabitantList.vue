@@ -28,26 +28,22 @@ import LTable from '@/components/UIComponents/Table.vue'
 import Card from '@/components/UIComponents/Cards/Card.vue'
 export default {
 
-  components: {
-    LTable,
-    Card
-  },
-
   props: {
     selectedAsset: Object
-  },
-
-  mounted () {
-    // debugger
   },
 
   data () {
     return {
       table: {
         columns: ['FullName', 'Colony', ''],
-        data: [...this.$store.getters.getHabitants]
+        data: [...this.$store.state.habitants]
       }
     }
+  },
+
+  components: {
+    LTable,
+    Card
   }
 
 }

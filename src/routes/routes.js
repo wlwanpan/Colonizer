@@ -6,6 +6,7 @@ import HabitantDetail from '@/components/Dashboard/Views/HabitantDetail.vue'
 import HabitantList from '@/components/Dashboard/Views/HabitantList.vue'
 import MarketPlace from '@/components/Dashboard/Views/MarketPlace.vue'
 import AssetsForm from '@/components/Dashboard/Views/AssetsForm.vue'
+import ProposalForm from '@/components/Dashboard/Views/ProposalForm.vue'
 
 const routes = [
   {
@@ -47,6 +48,11 @@ const routes = [
         path: 'assets-form',
         name: 'Assets Form',
         component: AssetsForm
+      },
+      {
+        path: 'proposal-form',
+        name: 'Proposal Form',
+        component: ProposalForm
       }
     ]
   }

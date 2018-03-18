@@ -62,9 +62,9 @@
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
-                       :columns="table2.columns"
-                       :data="table2.data"
-                       :showSell="table2.showSell">
+                       :columns="tableData.columns"
+                       :data="tableData.data"
+                       :showSell="tableData.showSell">
               </l-table>
             </div>
           </card>
@@ -78,30 +78,30 @@ import Card from '@/components/UIComponents/Cards/Card.vue'
 import StatsCard from '@/components/UIComponents/Cards/StatsCard.vue'
 import LTable from '@/components/UIComponents/Table.vue'
 
-const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+const tableColumns = ['Owner', 'Value', 'Description', 'AssetType', 'Longitude', 'Latitude']
 const tableData = []
 export default {
-  components: {
-    Card,
-    StatsCard,
-    LTable
-  },
+
   data () {
     return {
-      firstName: this.$store.getters.getHabitant.firstName,
-      lastName: this.$store.getters.getHabitant.lastName,
-      username: this.$store.getters.getHabitant.username,
-      colony: this.$store.getters.getHabitant.colony,
-      address: this.$store.getters.getHabitant.address,
-      table2: {
+      firstName: this.$store.state.habitant.firstName,
+      lastName: this.$store.state.habitant.lastName,
+      username: this.$store.state.habitant.username,
+      colony: this.$store.state.habitant.colony,
+      address: this.$store.state.habitant.address
+    }
+  },
+
+  computed: {
+    tableData: function () {
+      return {
         columns: [...tableColumns],
-        data: [...this.$store.getters.getAssets({
-            owned: true
-          })],
+        data: [...this.$store.getters.getAssets({ owned: true })],
         showSell: "true"
       }
     }
   },
+
   methods: {
 
     getClasses (index) {
@@ -115,14 +115,20 @@ export default {
       }
     },
     registerAssets () {
-        this.$router.push('/admin/assets-form');
+        this.$router.push('/admin/assets-form')
     },
     registerColony () {
       console.log('registerColony called')
     },
     broadcastProposal () {
-      console.log('broadcast called')
+      this.$router.push('/admin/proposal-form')
     }
+  },
+
+  components: {
+    Card,
+    StatsCard,
+    LTable
   }
 
 }

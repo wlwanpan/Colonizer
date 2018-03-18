@@ -7,19 +7,8 @@
 </template>
 
 <script>
-export default {
-  mounted() {
-    this.$store.dispatch('loadCoinbaseAddress')
-    this.$store.dispatch(
-      'contactCall',
-      {
-        method: 'initSelfHabitant',
-        params: undefined
-      }
-    )
-  }
-}
 </script>
+
 <style lang="scss">
   .vue-notifyjs.notifications{
     .list-move {

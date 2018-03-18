@@ -5,20 +5,19 @@ export default {
   hideLoading ({ commit }) { commit('UPDATE_PROCESSING_STATE', false) },
 
   // Habitant updates
-  updateHabitant ({ commit }, habitantDetails) {
-    commit('UPDATE_HABITANT', habitantDetails)
+  updateHabitant ({ commit }, habitantDetails) { commit('UPDATE_HABITANT', habitantDetails) },
+
+  updateAssets ({ commit }, assetDetails) { commit('UPDATE_ASSETS', assetDetails) },
+
+  loadResources ({ dispatch, commit }) {
+    dispatch('contactCall', { method: 'loadAssets', params: undefined })
+    dispatch('contactCall', { method: 'loadHabitants', params: undefined })
+    dispatch('contactCall', { method: 'initSelfHabitant', params: undefined })
   },
 
-  updateAssets ({ commit }, assetDetails) {
-    commit('UPDATE_ASSETS', assetDetails)
-  },
-
-  updateColonizerContract ({ commit }, contractDetails) {
+  updateColonizerContract ({ commit, dispatch }, contractDetails) {
     commit('INIT_COLONIZER_CONTRACT', contractDetails)
-  },
-
-  loadCoinbaseAddress ({ commit }) {
-    commit('SET_HABITANT_ADDRESS', web3.eth.accounts[0])
+    dispatch('loadResources')
   },
 
   // Contract Calls
@@ -30,12 +29,11 @@ export default {
     const PAGINATION_LIMIT = 10
     var contract = colonizer.at(address)
     var contractOption = { from: state.habitant.address, gas: 500000 }
-    console.log(state.habitant.address)
 
     // Send ETH to contract of provides a value
     if (value) { contractOption.value = window.web3.toWei(value) }
 
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
 
       switch (method) {
         // Habitant Method Call
@@ -49,13 +47,19 @@ export default {
           break
         case 'registerHabitant':
           contract.registerHabitant(...params, contractOption)
-          .then(transaction => resolve(transaction))
+          .then(transaction => {
+            dispatch('contactCall', { method: 'loadHabitants', params: undefined })
+            resolve(transaction)
+          })
           .catch(err => reject(err))
           break
 
         case 'registerAsset':
           contract.registerAsset(...params, contractOption)
-          .then(transaction => resolve(transaction))
+          .then(transaction => {
+            dispatch('contactCall', { method: 'loadAssets', params: undefined })
+            resolve(transaction)
+          })
           .catch(err => reject(err))
           break
 
@@ -135,6 +139,7 @@ export default {
 
       }
     })
+    .then(result => console.log(result))
     .finally(() => dispatch('hideLoading'))
   }
 

@@ -24,49 +24,31 @@ export default {
     columns: Array,
     data: Array,
     showBuy: String,
-    showSell: String
+    showSell: String,
+    showReport: Boolean
   },
   mounted () {
     // debugger
   },
   methods: {
+
     hasValue (item, column) {
       return item[column.toLowerCase()] !== 'undefined'
     },
+
     itemValue (item, column) {
       return item[column.toLowerCase()]
     },
+
     clickBuyAsset(asset) {
       // TODO: need to buy some assets
-      alert("gonnna buy this asset")
-    },
-    clickSellAsset(asset) {
-      // TODO: need to buy some assets
-      alert("gonnna sell this asset" + asset.assetId)
-      var params = [
-        asset.assetId,
-        this.toBigNumber(asset.value)
-      ]
 
-      this.$store.dispatch(
-        'contactCall',
-        {
-          method: 'sellAsset',
-          params
-        }
-      )
-      .then(result => {
-        this.$store.dispatch(
-          'contactCall',
-          {
-            method: 'loadAssets',
-            params: undefined
-          }
-        )
-        .then((data) => {
-          // debugger
-        })
-      })
+    },
+
+    clickSellAsset(asset) {
+      console.log("gonnna sell this asset" + asset.assetId)
+      var params = [ asset.assetId, this.toBigNumber(asset.value) ]
+      this.$store.dispatch('contactCall', { method: 'sellAsset', params })
     }
   }
 }

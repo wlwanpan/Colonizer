@@ -68,7 +68,7 @@ export default {
       username: '',
       password: '',
       colony: '',
-      options: ["ColonyA", "ColonyB", "ColonyC"]
+      options: ["Colony A", "Colony B", "Colony C", "Colony D", "Colony E"]
     }
   },
 
@@ -80,26 +80,11 @@ export default {
 
   methods: {
     registerHabitant () {
-      var params = [
-        this.fullName, this.username, this.password, "ColonyA"
-      ]
+      var colony = this.colony == '' ? "Colony A" : this.colony
+      var params = [ this.fullName, this.username, this.password, colony ]
 
-      this.$store.dispatch(
-        'contactCall',
-        {
-          method: 'registerHabitant',
-          params
-        }
-      )
-      .then(results => {
-
-        let { firstName, lastName, username, password, colony } = this.$data
-        this.$store.dispatch(
-          'updateHabitant',
-          { firstName, lastName, username, password, colony }
-        )
-        this.$router.push('/admin/habitant-detail')
-      })
+      this.$store.dispatch('contactCall', { method: 'registerHabitant', params })
+      this.$router.push('/admin/habitant-detail')
     }
   }
 }

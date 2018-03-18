@@ -57,7 +57,7 @@
         <button type="submit" class="btn btn-success btn-fill" @click.prevent="registerAsset">
           Submit
         </button>
-        <button type="submit" class="btn btn-fill" @click.prevent="back">
+        <button type="submit" class="btn btn-fill" @click.prevent="backOnePage">
           Back
         </button>
       </div>
@@ -70,17 +70,15 @@ import Card from '@/components/UIComponents/Cards/Card.vue'
 import Dialog from '@/components/Dashboard/Views/Dialog.vue'
 
 export default {
-  components: {
-    Card
-  },
+
   data () {
     return {
       firstName: this.$store.getters.getHabitant.firstName,
       lastName: this.$store.getters.getHabitant.lastName,
       asset: {
-        id: '4837493-4324343',
-        value: '33333',
-        description: 'a proper territory',
+        id: '',
+        value: '',
+        description: '',
         assetType: 'Industrial',
         longitude: '345.35454',
         latitude: '6873.343'
@@ -92,8 +90,6 @@ export default {
   methods: {
 
     registerAsset () {
-      // TODO: save assets to contract or whatever
-      // registerAsset(uint256 _value, string _description, uint256 _assetType, string _longitude, string _latitude)
       let { value, description, assetType, longitude, latitude } = this.asset
       let params = [
         this.toBigNumber(value),
@@ -103,35 +99,15 @@ export default {
         latitude
       ]
 
-      this.$store.dispatch(
-        'contactCall',
-        {
-          method: 'registerAsset',
-          params
-        }
-      )
-      .then(result => {
-        this.$modal.show(Dialog, {
-          title: 'Transaction Successful', message: 'Your Asset has successfully been registered'
-        }, {
-          adaptive: true
-        })
-        this.$store.dispatch(
-          'contactCall',
-          {
-            method: 'loadAssets',
-            params: undefined
-          }
-        )
-        .then((data) => {
-          // debugger
-        })
-      })
+      this.$store.dispatch('contactCall', { method: 'registerAsset', params })
     },
 
-    back () {
+    backOnePage () {
       this.$router.go(-1)
     }
+  },
+  components: {
+    Card
   }
 }
 

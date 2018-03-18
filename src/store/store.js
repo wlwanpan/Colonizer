@@ -20,7 +20,7 @@ const state = {
 
   habitant: {
 
-    address: 0x0,
+    address: web3.eth.accounts[0],
     status: 'offline',
     firstName: '',
     lastName: '',
