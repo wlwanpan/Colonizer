@@ -11,8 +11,9 @@
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
-                       :columns="table2.columns"
-                       :data="table2.data">
+                       :columns="table.columns"
+                       :data="table.data"
+                       :showReport="true">
               </l-table>
             </div>
           </card>
@@ -25,8 +26,6 @@
 <script>
 import LTable from '@/components/UIComponents/Table.vue'
 import Card from '@/components/UIComponents/Cards/Card.vue'
-const tableColumns = ['FullName', 'Penalty Score', 'Colony']
-const tableData = []
 export default {
 
   components: {
@@ -39,16 +38,13 @@ export default {
   },
 
   mounted () {
+    // debugger
   },
 
   data () {
     return {
-      table1: {
-        columns: [...tableColumns],
-        data: [...tableData]
-      },
-      table2: {
-        columns: [...tableColumns],
+      table: {
+        columns: ['FullName', 'Colony', ''],
         data: [...this.$store.getters.getHabitants]
       }
     }

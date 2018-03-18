@@ -3,9 +3,12 @@ export default {
 
   UPDATE_PROCESSING_STATE (state, showLoading) { state.showLoading = showLoading },
 
+  SET_DUMMY_ACCOUNT (state, accounts) { state.accounts = accounts },
+
   INIT_SELF_HABITANT (state, data) {
     var [fullname, username, penaltyScore, colony] = data
     var [firstName, lastName] = fullname.split(' ')
+    if (fullname === '' || username == '') return
     state.habitant.firstName = firstName
     state.habitant.lastName = lastName
     state.habitant.username = username

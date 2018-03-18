@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="container-fluid">
+    <div v-if="showForm" class="container-fluid">
       <div class="row">
         <div class="col-md-1">
         </div>
@@ -23,19 +23,27 @@ import GetCurrentStateForm from './HabitantProfile/GetCurrentStateForm.vue'
 
 export default {
 
+  data () {
+    return {
+      showForm: false
+    }
+  },
+
   components: {
     RegisterHabitantForm,
     DeregisterHabitantForm,
     GetCurrentStateForm
   },
 
-  beforeMount () {
+  mounted () {
     if (this.$store.getters.getHabitant.status === 'online') {
       this.$router.push('/admin/habitant-detail')
+    }
+    else {
+      this.data.showForm = true
     }
   }
 }
 </script>
 <style>
-
 </style>

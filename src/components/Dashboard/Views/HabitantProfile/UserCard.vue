@@ -13,7 +13,7 @@
           </stats-card>
         </div>
 
-        <div class="col-xl-4 col-md-6" @click.prevent="registerAssets">
+        <div class="col-xl-4 col-md-6" @click.prevent="registerColony">
           <stats-card>
             <div slot="header" class="icon-success">
               <i class="nc-icon nc-single-02 text-warning"></i>
@@ -24,13 +24,13 @@
           </stats-card>
         </div>
 
-        <div class="col-xl-4 col-md-6" @click.prevent="registerAssets">
+        <div class="col-xl-4 col-md-6" @click.prevent="broadcastProposal">
           <stats-card>
             <div slot="header" class="icon-success">
               <i class="nc-icon nc-single-02 text-warning"></i>
             </div>
             <div slot="content">
-              <h4 class="card-title">Deregister habitant</h4>
+              <h4 class="card-title">Broadcast Proposal</h4>
             </div>
           </stats-card>
         </div>
@@ -74,64 +74,58 @@
 </div>
 </template>
 <script>
-  import Card from '@/components/UIComponents/Cards/Card.vue'
-  import StatsCard from '@/components/UIComponents/Cards/StatsCard.vue'
-  import LTable from '@/components/UIComponents/Table.vue'
+import Card from '@/components/UIComponents/Cards/Card.vue'
+import StatsCard from '@/components/UIComponents/Cards/StatsCard.vue'
+import LTable from '@/components/UIComponents/Table.vue'
 
-  const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
-  const tableData = []
-  export default {
-    components: {
-      Card,
-      StatsCard,
-      LTable
-    },
-    data () {
-      return {
-        firstName: this.$store.getters.getHabitant.firstName,
-        lastName: this.$store.getters.getHabitant.lastName,
-        username: this.$store.getters.getHabitant.username,
-        colony: this.$store.getters.getHabitant.colony,
-        address: this.$store.getters.getHabitant.address,
-        details: [
-          {
-            title: '12',
-            subTitle: 'Files'
-          },
-          {
-            title: '2GB',
-            subTitle: 'Used'
-          },
-          {
-            title: '24,6$',
-            subTitle: 'Spent'
-          }
-        ],
-        table2: {
-          columns: [...tableColumns],
-          data: [...this.$store.getters.getAssets({
-              owned: true
-            })],
-          showSell: "true"
-        }
-      }
-    },
-    methods: {
-      getClasses (index) {
-        var remainder = index % 3
-        if (remainder === 0) {
-          return 'col-md-3 col-md-offset-1'
-        } else if (remainder === 2) {
-          return 'col-md-4'
-        } else {
-          return 'col-md-3'
-        }
-      },
-      registerAssets () {
-          this.$router.push('/admin/assets-form');
+const tableColumns = ['seller', 'value', 'description', 'assetType', 'longitude', 'latitude', '']
+const tableData = []
+export default {
+  components: {
+    Card,
+    StatsCard,
+    LTable
+  },
+  data () {
+    return {
+      firstName: this.$store.getters.getHabitant.firstName,
+      lastName: this.$store.getters.getHabitant.lastName,
+      username: this.$store.getters.getHabitant.username,
+      colony: this.$store.getters.getHabitant.colony,
+      address: this.$store.getters.getHabitant.address,
+      table2: {
+        columns: [...tableColumns],
+        data: [...this.$store.getters.getAssets({
+            owned: true
+          })],
+        showSell: "true"
       }
     }
+  },
+  methods: {
+
+    getClasses (index) {
+      var remainder = index % 3
+      if (remainder === 0) {
+        return 'col-md-3 col-md-offset-1'
+      } else if (remainder === 2) {
+        return 'col-md-4'
+      } else {
+        return 'col-md-3'
+      }
+    },
+    registerAssets () {
+        this.$router.push('/admin/assets-form');
+    },
+    registerColony () {
+      console.log('registerColony called')
+    },
+    broadcastProposal () {
+      console.log('broadcast called')
+    }
   }
+
+}
 
 </script>
 <style>

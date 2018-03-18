@@ -18,16 +18,7 @@ export default {
   },
 
   loadCoinbaseAddress ({ commit }) {
-    new Promise((resolve, reject) => {
-      window.web3.eth.getAccounts((err, result) => {
-        if (err || !result.length) reject(err)
-        else {
-          console.log('Logged in as:' + result[0])
-          commit('SET_HABITANT_ADDRESS', result[0])
-          resolve()
-        }
-      })
-    })
+    commit('SET_HABITANT_ADDRESS', web3.eth.accounts[0])
   },
 
   // Contract Calls
@@ -39,6 +30,7 @@ export default {
     const PAGINATION_LIMIT = 10
     var contract = colonizer.at(address)
     var contractOption = { from: state.habitant.address, gas: 500000 }
+    console.log(state.habitant.address)
 
     // Send ETH to contract of provides a value
     if (value) { contractOption.value = window.web3.toWei(value) }

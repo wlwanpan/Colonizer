@@ -11,9 +11,9 @@
             </template>
             <div class="table-responsive">
               <l-table class="table-hover"
-                       :columns="table2.columns"
-                       :data="table2.data"
-                       :showBuy="table2.showBuy">
+                       :columns="table.columns"
+                       :data="table.data"
+                       :showBuy="table.showBuy">
               </l-table>
             </div>
           </card>
@@ -42,11 +42,7 @@ export default {
 
   data () {
     return {
-      table1: {
-        columns: [...tableColumns],
-        data: [...tableData]
-      },
-      table2: {
+      table: {
         columns: [...tableColumns],
         data: [...this.$store.getters.getAssets({onSale: true})],
         showBuy: "true"

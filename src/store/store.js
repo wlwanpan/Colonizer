@@ -9,6 +9,8 @@ const state = {
 
   showLoading: false,
 
+  accounts: [],
+
   contract: {
 
     colonizer: undefined,
@@ -59,7 +61,7 @@ const getters = {
 
   getHabitantRegisteredCount: state => state.planet.habitantRegistered,
 
-  getHabitantCount: state => state.habitants.length,
+  getHabitantCount: state => state.habitants.length < 1 ? 1 : state.habitants.length,
 
   getAssetCount: state => _(state.assets).keys().length,
 

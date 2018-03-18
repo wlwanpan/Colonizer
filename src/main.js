@@ -42,8 +42,7 @@ window.addEventListener('load', function () {
   var colonizerContract = TruffleContract(ColonizerContract)
   colonizerContract.setProvider(window.web3.currentProvider)
 
-  // const testnetContractAddress = '0xa922202e3830aa5bc088652db8774cb975762a40'
-  const contractAddress = '0x7e63bb881aafe97595d483cc6374e7e65445b4b8'
+  const contractAddress = '0xb886bab35ca254e61116a0bde685acd2035f8419'
 
   store.dispatch(
     'updateColonizerContract',
