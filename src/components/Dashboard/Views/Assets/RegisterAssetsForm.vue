@@ -124,7 +124,7 @@ export default {
           }
         )
         .then((data) => {
-          debugger
+          // debugger
         })
       })
     },

@@ -51,15 +51,17 @@
             params
           }
         )
-        .then(results => {
-          console.log(results)
-
-          let { assetId, value } = this.$data
+        .then(result => {
           this.$store.dispatch(
-            'updateAssets',
-            { assetId, value }
+            'contactCall',
+            {
+              method: 'loadAssets',
+              params: undefined
+            }
           )
-          this.$router.push('/admin/habitant-detail')
+          .then((data) => {
+            // debugger
+          })
         })
       }
     }

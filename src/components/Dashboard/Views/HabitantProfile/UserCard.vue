@@ -30,7 +30,7 @@
               <i class="nc-icon nc-single-02 text-warning"></i>
             </div>
             <div slot="content">
-              <h4 class="card-title">Register Something</h4>
+              <h4 class="card-title">Deregister habitant</h4>
             </div>
           </stats-card>
         </div>
