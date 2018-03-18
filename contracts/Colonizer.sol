@@ -58,6 +58,13 @@ contract Colonizer {
   modifier assetValid(bytes32 _id) { require(assetsStorage[_id].valid);_; }
   modifier isAssetOwner(bytes32 _id) { require(assetsStorage[_id].owner == msg.sender);_; }
 
+  function getMyDetails() public view habitantOnline
+  returns(string fullName, string username, uint256 penaltyScore, string colony)
+  {
+    Habitant memory habitant = habitantsStorage[msg.sender];
+    return(habitant.fullName, habitant.username, habitant.penaltyScore, habitant.colony);
+  }
+
   function registerHabitant (string fullname, string username, string password, string colony) public {
     bytes32 passwordhash = keccak256(username, password);
 

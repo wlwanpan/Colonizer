@@ -25,16 +25,22 @@
 <script>
 import LTable from '@/components/UIComponents/Table.vue'
 import Card from '@/components/UIComponents/Cards/Card.vue'
-const tableColumns = ['Firstname', 'Lastname', 'Username', 'Colony']
+const tableColumns = ['FullName', 'Penalty Score', 'Colony']
 const tableData = []
 export default {
+
   components: {
     LTable,
     Card
   },
+
   props: {
     selectedAsset: Object
   },
+
+  mounted () {
+  },
+
   data () {
     return {
       table1: {
@@ -47,6 +53,7 @@ export default {
       }
     }
   }
+
 }
 </script>
 <style>

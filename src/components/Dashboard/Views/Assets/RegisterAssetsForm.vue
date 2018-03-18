@@ -67,6 +67,7 @@
 </template>
 <script>
 import Card from '@/components/UIComponents/Cards/Card.vue'
+import Dialog from '@/components/Dashboard/Views/Dialog.vue'
 
 export default {
   components: {
@@ -110,6 +111,11 @@ export default {
         }
       )
       .then(result => {
+        this.$modal.show(Dialog, {
+          title: 'Transaction Successful', message: 'Your Asset has successfully been registered'
+        }, {
+          adaptive: true
+        })
         this.$store.dispatch(
           'contactCall',
           {

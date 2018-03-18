@@ -3,6 +3,16 @@ export default {
 
   UPDATE_PROCESSING_STATE (state, showLoading) { state.showLoading = showLoading },
 
+  INIT_SELF_HABITANT (state, data) {
+    var [fullname, username, penaltyScore, colony] = data
+    var [firstName, lastName] = fullname.split(' ')
+    state.habitant.firstName = firstName
+    state.habitant.lastName = lastName
+    state.habitant.username = username
+    state.habitant.colony = colony
+    state.habitant.status = 'online'
+  },
+
   INIT_COLONIZER_CONTRACT (state, contractDetails) {
     var {colonizerContract, contractAddress} = contractDetails
 

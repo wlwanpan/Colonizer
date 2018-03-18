@@ -272,7 +272,9 @@ export default {
           params: undefined
         }
       )
-      .then(() => this.$router.push('/admin/habitant-list'))
+      .then((result) => {
+        this.$router.push('/admin/habitant-list')
+      })
     }
   },
 

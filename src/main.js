@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 
 import LightBootstrap from './light-bootstrap-main'
+import VModal from 'vue-js-modal'
 
 import mixins from '@/js/mixins'
 import underscore from 'vue-underscore'
@@ -17,6 +18,7 @@ import ColonizerContract from '@contracts/Colonizer.json'
 Vue.use(VueRouter)
 Vue.use(underscore)
 Vue.use(LightBootstrap)
+Vue.use(VModal, { dynamic: true })
 
 import {_} from 'vue-underscore'
 window._ = _ // fucking hell its not importing from any components
@@ -41,7 +43,7 @@ window.addEventListener('load', function () {
   colonizerContract.setProvider(window.web3.currentProvider)
 
   // const testnetContractAddress = '0xa922202e3830aa5bc088652db8774cb975762a40'
-  const contractAddress = '0xd81db717bf139dacb2f3c1df52b81ca223f5952d'
+  const contractAddress = '0x7e63bb881aafe97595d483cc6374e7e65445b4b8'
 
   store.dispatch(
     'updateColonizerContract',

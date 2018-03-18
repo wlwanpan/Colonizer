@@ -1,5 +1,6 @@
 <template>
   <div :class="{'nav-open': $sidebar.showSidebar}">
+    <modals-container></modals-container>
     <notifications></notifications>
     <router-view></router-view>
   </div>
@@ -9,6 +10,13 @@
 export default {
   mounted() {
     this.$store.dispatch('loadCoinbaseAddress')
+    this.$store.dispatch(
+      'contactCall',
+      {
+        method: 'initSelfHabitant',
+        params: undefined
+      }
+    )
   }
 }
 </script>

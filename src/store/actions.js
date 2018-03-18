@@ -47,6 +47,14 @@ export default {
 
       switch (method) {
         // Habitant Method Call
+        case 'initSelfHabitant':
+          contract.getMyDetails(contractOption)
+          .then((data) => {
+            commit('INIT_SELF_HABITANT', data)
+            resolve(data)
+          })
+          .catch(err => reject(err))
+          break
         case 'registerHabitant':
           contract.registerHabitant(...params, contractOption)
           .then(transaction => resolve(transaction))
@@ -65,10 +73,12 @@ export default {
           contract.assetCount(contractOption)
           .then(assetCount => {
             var totalAssets = assetCount.toNumber()
+
+            // removing pagination
             var paginationFrom = _(state.assets).keys().length
             var paginationTo = (totalAssets - paginationFrom) > PAGINATION_LIMIT ? (paginationFrom + PAGINATION_LIMIT) : totalAssets
 
-            _(_.range(paginationFrom, paginationTo)).each((paginationIndex) => {
+            _(_.range(totalAssets)).each((paginationIndex) => {
               promiseOutput.push(
                 new Promise((resolve, reject) => {
                   contract.getAssetByIndex.call(web3.toBigNumber(paginationIndex))
@@ -88,7 +98,7 @@ export default {
 
           contract.habitantCount(contractOption)
           .then(habitantCount => {
-            _(_.range(habitantCount)).each((index) => {
+            _(_.range(habitantCount.toNumber())).each((index) => {
               promiseOutput.push(
                 new Promise((resolve, reject) => {
                   contract.getHabitantByIndex.call(web3.toBigNumber(index))

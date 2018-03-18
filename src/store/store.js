@@ -23,7 +23,8 @@ const state = {
     firstName: '',
     lastName: '',
     username: '',
-    colony: ''
+    colony: '',
+    penaltyScore: 0
 
   },
 

@@ -30,7 +30,7 @@ export default {
   },
 
   beforeMount () {
-    if (this.$store.getters.getHabitant.status == 'online') {
+    if (this.$store.getters.getHabitant.status === 'online') {
       this.$router.push('/admin/habitant-detail')
     }
   }
