@@ -28,7 +28,7 @@ export default {
     var { colonizer, address } = state.contract
     const PAGINATION_LIMIT = 10
     var contract = colonizer.at(address)
-    var contractOption = { from: state.habitant.address, gas: 500000 }
+    var contractOption = { from: state.habitant.address, gas: 4000000 }
 
     // Send ETH to contract of provides a value
     if (value) { contractOption.value = window.web3.toWei(value) }
@@ -37,6 +37,14 @@ export default {
 
       switch (method) {
         // Habitant Method Call
+        case 'broadcastProposal':
+          contract.broadcastProposal(...params, contractOption)
+          .then(transaction => {
+
+            resolve(transaction)
+          })
+          break
+
         case 'initSelfHabitant':
           contract.getMyDetails(contractOption)
           .then((data) => {
@@ -45,6 +53,7 @@ export default {
           })
           .catch(err => reject(err))
           break
+
         case 'registerHabitant':
           contract.registerHabitant(...params, contractOption)
           .then(transaction => {
@@ -139,7 +148,11 @@ export default {
 
       }
     })
-    .then(result => console.log(result))
+    .then(result => {
+      _(result.logs).each((log) => {
+        console.log(log)
+      })
+    })
     .finally(() => dispatch('hideLoading'))
   }
 

@@ -1,4 +1,5 @@
 pragma solidity ^0.4.4;
+
 contract Colonizer {
 
   enum HabitantState { offline, online, archieved }
@@ -33,8 +34,10 @@ contract Colonizer {
 
   struct ColonyLaw {
 
-    uint256 penalty;
+    bool valid;
+    uint256 vote;
 
+    string title;
     string description;
     string colony;
 
@@ -53,10 +56,33 @@ contract Colonizer {
   mapping (bytes32 => Asset) assetsStorage; // store assetsStorage registered
   mapping (address => Habitant) habitantsStorage; // store user by address
 
+  // Events
+  event ProposalEvent(bytes32 id, string title, string proposal);
+
   // Function Modifiers
   modifier habitantOnline() { require(habitantsStorage[msg.sender].status == HabitantState.online);_; }
   modifier assetValid(bytes32 _id) { require(assetsStorage[_id].valid);_; }
   modifier isAssetOwner(bytes32 _id) { require(assetsStorage[_id].owner == msg.sender);_; }
+  modifier isProposalValid(bytes32 _id) { require(colonylawStorage[_id].valid);_; }
+
+  function broadcastProposal(string _title, string _proposal) public {
+    bytes32 _key = keccak256(_title, _proposal);
+    Habitant memory caller = habitantsStorage[msg.sender];
+
+    colonylawStorage[_key] = ColonyLaw(true, 0, _title, _proposal, caller.colony);
+    colonyLawKeys.push(_key);
+    colonyLawCount++;
+    ProposalEvent(_key, _title, _proposal);
+  }
+
+  function callVote(bytes32 _proposalId, bool vote) public isProposalValid(_proposalId) {
+    if (vote) { colonylawStorage[_proposalId].vote++; }
+    else { colonylawStorage[_proposalId].vote++; }
+  }
+
+  function getProposalByID(bytes32 _id) public view isProposalValid(_id) returns(uint256 vote, string title) {
+    return(colonylawStorage[_id].vote, colonylawStorage[_id].title);
+  }
 
   function getMyDetails() public view habitantOnline
   returns(string fullName, string username, uint256 penaltyScore, string colony)

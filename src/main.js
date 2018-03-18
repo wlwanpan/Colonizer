@@ -21,7 +21,7 @@ Vue.use(LightBootstrap)
 Vue.use(VModal, { dynamic: true })
 
 import { _ } from 'vue-underscore'
-window._ = _ // fucking hell its not importing from any components
+window._ = _ // hell its not importing from any components
 
 Vue.config.productionTip = false
 
@@ -36,24 +36,19 @@ window.addEventListener('load', function () {
     window.web3 = new Web3(window.web3.currentProvider)
   }
   else {
+
     console.log('Web3 injected browser: Fail. You should consider trying MetaMask.')
-    window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+    window.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'))
   }
 
   var colonizerContract = TruffleContract(ColonizerContract)
   colonizerContract.setProvider(window.web3.currentProvider)
 
 
-  // const contractAddress = '0xb886bab35ca254e61116a0bde685acd2035f8419' // Testnet
-  const contractAddress = '0x82002f103255b870c5ad9000b04dba7146fc12f3'
+  const ropstenTestNetAddress = '0x5dda3ccfb90399e382eed802d6de1b5a7f5f2dc9'
+  const contractAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10'
 
-  store.dispatch(
-    'updateColonizerContract',
-    {
-      colonizerContract,
-      contractAddress
-    }
-  )
+  store.dispatch('updateColonizerContract', { colonizerContract, contractAddress })
 
   Vue.mixin(mixins)
 

@@ -1,6 +1,6 @@
 <template>
   <card>
-    <h4 slot="header" class="card-title">Deregister new habitant</h4>
+    <h4 slot="header" class="card-title">Archieve habitant</h4>
     <form>
       <div class="row">
         <div class="col-md-6">

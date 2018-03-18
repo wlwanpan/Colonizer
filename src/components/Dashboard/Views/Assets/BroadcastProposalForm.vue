@@ -47,8 +47,8 @@ export default {
   methods: {
 
     broadcastProposal () {
-      debugger
-      // this.$store.dispatch('contactCall', { method: 'registerAsset', params })
+      var params = [ this.title, this.description ]
+      this.$store.dispatch('contactCall', { method: 'broadcastProposal', params })
     },
 
     backOnePage () {

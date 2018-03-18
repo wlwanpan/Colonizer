@@ -1,10 +1,14 @@
 <template>
   <div id="confirm-dialog">
     <div class="wrapper">
-      <h1>{{ title }}</h1>
-      <p>{{ message }}</p>
       <div>
-        <button class="btn-success btn-fill" @click="$emit('close')">Close</button>
+        <h1>{{ id }}</h1>
+        <p>{{ title }}</p>
+      </div>
+      <p>{{ proposal }}</p>
+      <div>
+        <button class="btn-success btn-fill" @click="$emit('close')">Agree</button>
+        <button class="btn-default btn-fill" @click="$emit('close')">Decline</button>
       </div>
     </div>
   </div>
@@ -14,8 +18,9 @@
 
 export default {
   props: [
+    'id',
     'title',
-    'message'
+    'proposal'
   ]
 }
 

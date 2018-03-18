@@ -20,7 +20,7 @@ const state = {
 
   habitant: {
 
-    address: web3.eth.accounts[0],
+    address: web3.eth.accounts[0], // Hummmm metamask call error for local node
     status: 'offline',
     firstName: '',
     lastName: '',
@@ -43,7 +43,6 @@ const state = {
 
   habitantsRegistered: {},
 
-  // Assets Store { assetID: {id: bytes32, value: uint256, description: string} }
   assets: {}
 
 }

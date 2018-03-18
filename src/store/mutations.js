@@ -9,6 +9,7 @@ export default {
     var [fullname, username, penaltyScore, colony] = data
     var [firstName, lastName] = fullname.split(' ')
     if (fullname === '' || username == '') return
+    state.habitant.address = web3.eth.accounts[0]
     state.habitant.firstName = firstName
     state.habitant.lastName = lastName
     state.habitant.username = username
@@ -23,10 +24,6 @@ export default {
       colonizer: colonizerContract,
       address: contractAddress
     }
-  },
-
-  SET_HABITANT_ADDRESS (state, coinbaseAddress) {
-    state.habitant.address = coinbaseAddress
   },
 
   UPDATE_HABITANT (state, habitantDetails) {

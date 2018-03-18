@@ -7,6 +7,23 @@
 </template>
 
 <script>
+import Dialog from '@/components/Dashboard/Views/Dialog.vue'
+
+export default {
+  mounted () {
+    var {colonizer, address} = this.$store.state.contract
+    var contract = colonizer.at(address)
+
+    contract.ProposalEvent({}, {fromBlock: 0, toBlock: 'latest'}, (tx) => {
+      if (tx) {
+        _(tx.logs).each((log) => {
+          if (log.event == "ProposalEvent") { this.$modal.show(Dialog, log.args) }
+        })
+      }
+    })
+  }
+}
+
 </script>
 
 <style lang="scss">

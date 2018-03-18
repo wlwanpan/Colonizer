@@ -1,12 +1,22 @@
 # Colonizer (MissionHack 2018)
 
-Colonizer is a community platform that serves as an asset management, trading platform and voting tool.
+Colonizer serves as an asset manager, trading platform and voting tool.
+The goal is to improve marginal productivity of capital and allow for a community driven governance.
+
+Colony:
+
+- Each Habitant, within a colony, can broadcast a proposal to alter the current state of the Colony law.
+- Upon reaching a consensus of majority, the proposal is either declared settled or archieved.
+- Acting against a settled law will deduct the habitants' penalty score.
 
 Deployed: https://missionhack-colonizer.herokuapp.com
+
+Contract Address: '0x5dda3ccfb90399e382eed802d6de1b5a7f5f2dc9'
 
 ## Requirements
 
 - Metamask (Chrome extension)
+- Ganache-cli / Geth
 
 ## Tools
 
