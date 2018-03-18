@@ -40,7 +40,7 @@ export default {
       this.$router.push('/admin/habitant-detail')
     }
     else {
-      this.data.showForm = true
+      this.showForm = true
     }
   }
 }
