@@ -11,12 +11,12 @@ const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/admin/overview'
+    redirect: '/admin/planet'
   },
   {
     path: '/admin',
     component: DashboardLayout,
-    redirect: '/admin/overview',
+    redirect: '/admin/planet',
     children: [
       {
         path: 'planet',
