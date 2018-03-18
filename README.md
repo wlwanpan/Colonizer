@@ -1,5 +1,7 @@
 # Colonizer (MissionHack 2018)
 
+Link: https://missionhack-colonizer.herokuapp.com
+
 Colonizer serves as an asset manager, trading platform and voting tool.
 The goal is to improve marginal productivity of capital and allow for a community driven governance.
 
@@ -9,8 +11,6 @@ Colony:
 - Upon reaching a consensus of majority, the proposal is either declared settled or archieved.
 - Acting against a settled law will deduct the habitants' penalty score.
 - Continue here ...
-
-Deployed: https://missionhack-colonizer.herokuapp.com
 
 ## Contract
 
