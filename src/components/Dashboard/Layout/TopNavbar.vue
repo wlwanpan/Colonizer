@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
     <div v-if="transactionProcessing" class="container-fluid">
       <a class="navbar-brand transaction-loader" href="#">
-        Processing Transcation <span>.</span><span>.</span><span>.</span>
+        Processing Transaction <span>.</span><span>.</span><span>.</span>
       </a>
     </div>
     <div v-else class="container-fluid">

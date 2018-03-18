@@ -11,8 +11,8 @@
               <p class="card-category">Assets</p>
               <h4 class="card-title">{{ assetCount }}</h4>
             </div>
-            <div slot="footer">
-              <i class="fa fa-refresh"></i>territories
+            <div slot="footer" class="typewriter">
+              Frequency of asset purchases per day
             </div>
           </stats-card>
         </div>
@@ -26,8 +26,8 @@
               <p class="card-category">Habitants</p>
               <h4 class="card-title">{{ habitantCount }}</h4>
             </div>
-            <div slot="footer">
-              <i class="fa fa-calendar-o"></i>total
+            <div slot="footer" class="typewriter">
+              Number of habitants owning assets
             </div>
           </stats-card>
         </div>
@@ -41,15 +41,15 @@
               <p class="card-category">Colonies</p>
               <h4 class="card-title">23</h4>
             </div>
-            <div slot="footer">
-              <i class="fa fa-clock-o"></i>New Earth
+            <div slot="footer" class="typewriter">
+              Colonies formed as part of new earth
             </div>
           </stats-card>
         </div>
 
       </div>
       <div class="row">
-        <div class="col-md-14">
+        <div class="col-md-14 svg-center">
           <div id="tooltip-container"></div>
 
           <div id="canvas-svg"></div>
@@ -414,6 +414,15 @@ body {
     blink-caret .5s step-end infinite;
 }
 
+.typewriter {
+  overflow: hidden;
+  /* border-right: .15em solid orange; */
+  white-space: nowrap;
+  animation:
+    typing 2s steps(30, end),
+    blink-caret .5s step-end infinite;
+}
+
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
@@ -443,7 +452,7 @@ radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px
 background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
 background-position: 0 0, 40px 60px, 130px 270px, 70px 100px; */
 }
-.svg {
+.svg-center {
   display: block;
   margin: auto;
 }
