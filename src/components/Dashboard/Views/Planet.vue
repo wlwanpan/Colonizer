@@ -12,7 +12,7 @@
               <h4 class="card-title">{{ assetCount }}</h4>
             </div>
             <div slot="footer" class="typewriter">
-              Frequency of asset purchases per day
+              The frequency of asset purchases per day
             </div>
           </stats-card>
         </div>
@@ -27,7 +27,7 @@
               <h4 class="card-title">{{ habitantCount }}</h4>
             </div>
             <div slot="footer" class="typewriter">
-              Number of habitants owning assets
+              The number of habitants owning assets
             </div>
           </stats-card>
         </div>
@@ -42,7 +42,7 @@
               <h4 class="card-title">23</h4>
             </div>
             <div slot="footer" class="typewriter">
-              Colonies formed as part of new earth
+              The colonies formed as part of new earth
             </div>
           </stats-card>
         </div>
@@ -209,13 +209,44 @@ export default {
           .on("mousemove", function(d) {
               var html = "";
 
+              var laws = [
+                "Bans abortion as early as six weeks after menstrual period",
+                "Same-sex marriage legalized",
+                "Grants all applicants an equal opportunity to obtain",
+                "credit through the anti-discrimination provision",
+                "Prohibits discrimination in the sale, rental, and",
+                "financing of housing on the basis of race, color",
+                "Requires that gun manufacturers, importers, and persons",
+                "in the business of selling firearms have a License",
+                "Prohibited interstate trade in handguns, increased",
+                "the minimum age to 21 for buying handguns.",
+                "Prevent firearms manufacturers and licensed dealers",
+                "from being held liable for negligence when crimes",
+                "Same-sex marriage legalized",
+                "Constitutional provisions prohibiting same-sex marriage",
+                "The general age at which a person may marry is 18",
+                "16- or 17-year-olds may get married with their parents",
+                "Control farms that can produce fuels that displace",
+                "gasoline consumption, sometimes reducing greenhouse gas emissions"
+              ];
+              var lawNumber1 = (Math.floor(Math.random() * Math.floor(9))) * 2;
               html += "<div class=\"tooltip_kv\">";
               html += "<div class=\"tooltip_key\">";
-              html += id_name_map[d.id];
+              html += id_name_map[d.id].split("").reverse().join("").toLowerCase() + " territories";
               html += "</div>";
-              html += "<div class=\"tooltip_value\">";
-              html += (valueById.get(d.id) ? valueFormat(valueById.get(d.id)) : "");
+              html += "<div class=\"css-typing tooltip_value\">";
+              html += "<p>";
+              html += (valueById.get(d.id) ? valueFormat(valueById.get(d.id)) : "") + " inhabitants";
               html += "";
+              html += "</p>";
+              html += "<p>";
+              html += laws[lawNumber1];
+              html += "";
+              html += "</p>";
+              html += "<p>";
+              html += laws[lawNumber1 + 1];
+              html += "";
+              html += "</p>";
               html += "</div>";
               html += "</div>";
 
@@ -399,21 +430,8 @@ body {
   font-weight: bold;
 }
 .tooltip_value {
-  margin-left: 20px;
+  /* margin-left: 20px; */
   float: right;
-}
-
-.tooltip_value {
-  color: black;
-  font-family: monospace;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation:
-    typing 2s steps(30, end),
-    blink-caret .5s step-end infinite;
 }
 
 .typewriter {
@@ -435,6 +453,138 @@ body {
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: orange }
+}
+
+.css-typing p {
+  border-right: .15em solid orange;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin:0
+}
+.css-typing p:nth-child(1) {
+  width: 10.5em;
+  -webkit-animation: type 2s steps(40, end);
+  animation: type 2s steps(40, end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  white-space: nowrap
+}
+
+.css-typing p:nth-child(2) {
+  width: 31.5em;
+  opacity: 0;
+  -webkit-animation: type2 2s steps(40, end);
+  animation: type2 2s steps(40, end);
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  white-space: nowrap
+}
+
+.css-typing p:nth-child(3) {
+  width: 31.5em;
+  opacity: 0;
+  -webkit-animation: type2 2s steps(40, end);
+  animation: type2 2s steps(40, end);
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  white-space: nowrap
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid orange;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid orange;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid orange;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid orange;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent;
+  }
 }
 
 .card {
